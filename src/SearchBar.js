@@ -5,24 +5,22 @@ class SearchBar extends Component {
 
 
   render() {
-      const {textBefore, texttype, searchText, onInptChange, onBtnClick, searchTerm} = this.props;
+      const {texttype, searchText, onInptChange, onBtnClick, searchTerm} = this.props;
 
     return (
           <div className="container">
-                  <div className="row">    
+                  <div className="row py1">    
                       <h3>
                           <label>{texttype}</label>
                       </h3>
                   </div>
-                  <div className="row">
+                  <div className="row py2">
                       <p2>
-                            <div className="col-xs-4">
-                                <label>{textBefore}</label>
-                            </div>
-                            <div className="col-xs-4">
+
+                            <div className="col-xs-6">
                                   <input type="text" onChange={onInptChange} value={searchTerm}></input>
                             </div>
-                            <div className="col-xs-3">
+                            <div className="col-xs-6">
                                   <button onClick={onBtnClick}>{searchText}</button>
                             </div>
                      </p2>
@@ -33,3 +31,10 @@ class SearchBar extends Component {
 }
 
 export default SearchBar;
+
+
+
+ /*                           <div className="col-xs-4">
+                                <label>{textBefore}</label>
+                            </div>
+*/

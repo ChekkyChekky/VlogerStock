@@ -9,7 +9,7 @@ import YTChannels from './youtube-api-channels';
 import YTChannelsFromName from './youtube-api-channels-by-username';
 import YTVideos from './youtube-api-videos'; 
 import YTPlaylists from './youtube-api-playlists'; 
-import YTActivities from './youtube-api-activities'
+//import YTActivities from './youtube-api-activities'
 
 const API_KEY = 'AIzaSyArh26s8VejK8o2prCiV9oCYDIw6SEcsPY';
 
@@ -37,7 +37,6 @@ class App extends Component {
         /*----------------------*/
             activitiesData: null,
         /*----------------------*/
-            isMarketStartCalc: false
         };
     }
 
@@ -79,7 +78,10 @@ class App extends Component {
     
     /*-----------------CHANNELS API*/
     handleGetChannelDetails(channelID) {
-      YTChannels({key: API_KEY, id: channelID}, 
+      const indexOfSlash = channelID.lastIndexOf('/');
+      const ID = channelID.slice(indexOfSlash+1);
+      console.log(ID);
+      YTChannels({key: API_KEY, id: ID}, 
                 (data) => {     
                 this.setState({ChannelData: data});
 
@@ -88,7 +90,7 @@ class App extends Component {
                 this.handleGetPlaylistsDetails({channelID : data.Snippet.id});
                 this.handleGetActivitiesDetails({channelID: data.Snippet.id});
               });
-       this.setState({selectedVideo: null, videos: [], searchTerm: '', videoData: null, videoID: ''});
+       this.setState({selectedVideo: null, videos: [], searchTerm: '', videoData: null, videoID: '', channelID: ID});
        
     }
 
@@ -146,13 +148,13 @@ class App extends Component {
              this.setState({ChannelData: null});
     }
 
-    handleMarketCalcstartClick() {
+  /*  handleMarketCalcstartClick() {
              this.setState({isMarketStartCalc: true});
     }
 
     handleMarketCalcStopClick() {
              this.setState({isMarketStartCalc: false});
-    }
+    }*/
     /*-----------------VIDEOS API*/
 
     /*-----------------ACTIVITIES API*/
@@ -192,8 +194,7 @@ class App extends Component {
     /*-------------------------------*/
 
     render() {
-    const {searchTerm, videos, selectedVideo, ChannelData, channelID, channelName, videoID, videoId_Array, videoData, playlistData, activitiesData, 
-            isMarketStartCalc} = this.state;
+    const {searchTerm, videos, selectedVideo, ChannelData, channelID, channelName, videoID, videoId_Array, videoData, playlistData, activitiesData} = this.state;
     
      return (
                     
@@ -202,62 +203,22 @@ class App extends Component {
                         <div className="row">
                             <div className="container">
                                     <div className="h1" align="center">
-                                        {ChannelData ? 
-                                        (
-                                            <div className="container">
-                                                        {isMarketStartCalc ?
-                                                        (
-                                                        <div className="col-lg">
-                                                            <h3>
-                                                                <button type="submit" class="btn btn-outline-danger"
-                                                                onClick={this.handleMarketCalcStopClick.bind(this)}>Вернуться на главную</button>
-                                                            </h3>
-                                                        </div> 
-                                                        ) : 
-                                                        (
-                                                            <div className="row">
-                                                                <div className="col-lg-6">
-                                                                    <button type="submit" class="btn btn-outline-danger"
-                                                                    onClick={this.handleMarketCalcstartClick.bind(this)}>Рассчитать стоимость рекламы</button>
-                                                                </div>
-                                                                <div className="col-lg-6">
-                                                                    <button type="submit" class="btn btn-outline-danger"
-                                                                    onClick={this.handleResetClick.bind(this)}>Сброс</button>
-                                                                </div>
-                                                            </div>
-                                                        )
-                                                        }
-                                            </div>
-                                        ) : 
-                                        (
-                                                <div className="col-lg" Color="lightblue">
+                                                <div className="col-xs" Color="lightblue">
                                                         Стоимость рекламы на Youtube
                                                 </div>
-                                        )                               
-                                        }
                                     </div> 
                             </div>
                         </div>
                         <div className="row"> 
                                 <SearchBar 
-                                    textBefore="youtube.com/channel/"
-                                    texttype="введите ID канала"
-                                    searchText="Поиск"
+                                    texttype="Введите адрес канала"
+                                    searchText="Рассчитать стоимость рекламы"
                                     onInptChange={this.handleInputChannelsChange.bind(this, 'channelID')}
                                     onBtnClick={this.handleGetChannelDetails.bind(this, channelID)}
                                     value={channelID}
                                 />
                         </div>
-                        <div className="row">
-                                    <SearchBar 
-                                        textBefore="youtube.com/user/"
-                                        texttype="введите название канала"
-                                        searchText="Поиск"
-                                        onInptChange={this.handleInputChannelsNameChange.bind(this, 'channelName')}
-                                        onBtnClick={this.handleGetChannelDetailsFromName.bind(this, channelName)}
-                                        value={channelName}
-                                    />  
-                        </div>
+ 
                         <div className="row">
                             <div className="clearfix">
                             {selectedVideo ? 
@@ -272,12 +233,11 @@ class App extends Component {
                                 <div className="clearfix">
                                     <div className="container">
                                         {ChannelData.map((channel, index) => {
-                                                const viewsMil = channel.statistics.viewCount/1000000;
                                                 const publishedCut = channel.snippet.publishedAt.slice(0,10);
                                         
                                                 return (
                                                     <div className = "row">   
-                                                        <div className="col-lg-6">         
+                                                        <div className="col-xs-6">         
                                                             <div key={index}>
                                                                 <h1>Канал : {channel.snippet.title}</h1>
 
@@ -297,10 +257,10 @@ class App extends Component {
                                                                         <h3> Страна:</h3><div> {channel.snippet.country}</div>
                                                                     </div>                                                                 
                                                                 ) : null}
-                                                                {(channel.snippet.viewsMil !== 0) ? 
+                                                                {(channel.snippet.viewCount !== 0) ? 
                                                                 (       
                                                                     <div>                                                                 
-                                                                        <h3> Просмотров, млн.:</h3><div> {viewsMil} </div>
+                                                                        <h3> Просмотров:</h3><div> {channel.statistics.viewCount} </div>
                                                                     </div>                                                                 
                                                                 ) : null}
                                                                 {(channel.statistics.commentCount !== 0) ? 
@@ -329,17 +289,12 @@ class App extends Component {
                                                                 ) : null}  
                                                             </div> 
                                                         </div>
-                                                        <div className="col-lg-6"> 
-                                                            {isMarketStartCalc ?
-                                                                (
+                                                        <div className="col-xs-6"> 
                                                                         <CostCalc
                                                                         viewsSum = {channel.statistics.viewCount}
-                                                                        commentsSum = {channel.statistics.commentCount}
-                                                                        subscriberSum  = {channel.statistics.subscriberCount}
                                                                         videosSum = {channel.statistics.videoCount}
                                                                         />
-                                                                ) : null
-                                                            }
+
                                                         </div>
                                                     </div>        
                                                     );
@@ -461,4 +416,45 @@ export default App;
                                 </div>
                                 ) : null
                             }
+*/
+
+/*
+
+                       <div className="row">
+                                    <SearchBar 
+                                        textBefore="youtube.com/user/"
+                                        texttype="введите название канала"
+                                        searchText="Поиск"
+                                        onInptChange={this.handleInputChannelsNameChange.bind(this, 'channelName')}
+                                        onBtnClick={this.handleGetChannelDetailsFromName.bind(this, channelName)}
+                                        value={channelName}
+                                    />  
+                        </div>
+
+*/
+
+/*
+
+                                                        {isMarketStartCalc ?
+                                                        (
+                                                        <div className="col-lg">
+                                                            <h3>
+                                                                <button type="submit" class="btn btn-outline-danger"
+                                                                onClick={this.handleMarketCalcStopClick.bind(this)}>Вернуться на главную</button>
+                                                            </h3>
+                                                        </div> 
+                                                        ) : 
+                                                        (
+                                                            <div className="row">
+                                                                <div className="col-lg-6">
+                                                                    <button type="submit" class="btn btn-outline-danger"
+                                                                    onClick={this.handleMarketCalcstartClick.bind(this)}>Рассчитать стоимость рекламы</button>
+                                                                </div>
+                                                                <div className="col-lg-6">
+                                                                    <button type="submit" class="btn btn-outline-danger"
+                                                                    onClick={this.handleResetClick.bind(this)}>Сброс</button>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }
 */

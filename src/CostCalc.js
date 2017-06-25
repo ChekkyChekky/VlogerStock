@@ -6,18 +6,15 @@ class CostCalc extends Component{
         super();
 
         this.state = {
-            likesSum: props.likesSum,
             viewsSum: props.viewsSum,
-            commentsSum: props.commentsSum,
-            subscriberSum: props.subscriberSum,
             videosSum: props.videosCount
         };
     }
 
     render(){
-        const {likesSum, viewsSum, commentsSum, subscriberSum, videosSum} = this.props
-        const cost_per_1000 = 30;
-        const result = Math.round( viewsSum / videosSum * cost_per_1000 / 1000);
+        const {viewsSum, videosSum} = this.props
+        const cost_per_1000 = 0.25;
+        const result = Math.round( viewsSum / videosSum * cost_per_1000);
     
         
         const result_30sec_promo_start = Math.round(result/6);
@@ -31,22 +28,22 @@ class CostCalc extends Component{
                 </div>
                 <div className = "row">
                     <div>
-                        <h3> Целиковый ролик:</h3><div> {result} тыс. руб </div>            
+                        <h3> Заказной ролик:</h3><div> {result} руб </div>            
                     </div>                       
                 </div>
                 <div className = "row">
                     <div>
-                        <h3> Промо 30 секунд в начале:</h3><div>  {result_30sec_promo_start} тыс. руб</div>
+                        <h3>Продакт-плейсмент:</h3><div> {result_product_placement} руб</div>
                     </div>
                 </div>
                 <div className = "row">
                     <div>
-                        <h3>Продакт-плейсмент:</h3><div> {result_product_placement} тыс. руб</div>
+                        <h3> Промо 30 секунд в начале:</h3><div>  {result_30sec_promo_start} руб</div>
                     </div>
                 </div>
                 <div className = "row">
                     <div>
-                        <h3> Промо 30 секунд в конце:</h3><div> {result_30sec_promo_end} тыс. руб</div>
+                        <h3> Промо 30 секунд в конце:</h3><div> {result_30sec_promo_end} руб</div>
                     </div>
                 </div>
         </div>
