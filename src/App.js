@@ -156,7 +156,7 @@ class App extends Component {
     /*-----------------VIDEOS API*/
 
     /*-----------------ACTIVITIES API*/
-    handleGetActivitiesDetails(channelID) {
+ /*   handleGetActivitiesDetails(channelID) {
       YTActivities({key: API_KEY, channelID: channelID, maxResults: 50}, 
                 (data) => {  
                 this.setState({activitiesData: data});
@@ -174,7 +174,7 @@ class App extends Component {
               });
 
         this.setState({selectedVideo: null, videos: [], searchTerm: '', videoData: null, videoID: ''});
-    }
+    }*/
     /*-----------------ACTIVITIES API*/
 
     /*--------------------------------*/
