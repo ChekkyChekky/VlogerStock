@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import "bootswatch/united/bootstrap.css";
 
+import Grid  from 'react-bootstrap/lib/Grid';
+import Nav from 'react-bootstrap/lib/Nav';
+import Navbar from 'react-bootstrap/lib/Navbar';
+import NavItem  from 'react-bootstrap/lib/NavItem';
+
 import SearchBar from './SearchBar'
 import CostCalc from './CostCalc'
 
@@ -29,7 +34,7 @@ class App extends Component {
         /*----------------------*/
             videoData: null,
             videoID: '',
-            videoId_Array: [], 
+    //        videoId_Array: [], 
             videoDataArray: [],   
         /*----------------------*/
             playlistData: null,  
@@ -198,16 +203,19 @@ class App extends Component {
     
      return (
                     
-                    <div className="fluid-container">     
-                         
-                        <div className="row">
-                            <div className="container">
-                                    <div className="h1" align="center">
-                                                <div className="col-xs" Color="lightblue">
-                                                        Стоимость рекламы на Youtube
-                                                </div>
-                                    </div> 
+                    <div className="container">
+                            <div className="row"> 
+
                             </div>
+                        <div className="row">
+                                <div className="col-md-8 col-md-offset-2" Color="lightblue">
+                                    <h1 className="brand-heading" align="center">
+                                       Стоимость рекламы на Youtube
+                                    </h1> 
+                                    <p1 class="intro-text">
+					                    узнай, сколько должна стоить реклама в твоих видео
+				                    </p1>
+                                </div>
                         </div>
                         <div className="row"> 
                                 <SearchBar 
@@ -312,6 +320,10 @@ class App extends Component {
 }
 export default App;
 
+/*
+                        
+                         
+*/
 /*
 
                         <SearchBar

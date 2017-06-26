@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-
+import Grid  from 'react-bootstrap/lib/Grid';
+import Nav from 'react-bootstrap/lib/Nav';
+import Navbar from 'react-bootstrap/lib/Navbar';
+import NavItem  from 'react-bootstrap/lib/NavItem';
 
 class SearchBar extends Component {
 
@@ -21,7 +24,7 @@ class SearchBar extends Component {
                                   <input type="text" onChange={onInptChange} value={searchTerm}></input>
                             </div>
                             <div className="col-xs-6">
-                                  <button onClick={onBtnClick}>{searchText}</button>
+                                  <button onClick={onBtnClick} >{searchText}</button>
                             </div>
                      </p2>
                   </div>
