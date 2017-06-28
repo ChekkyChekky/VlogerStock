@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import Grid  from 'react-bootstrap/lib/Grid';
-import Nav from 'react-bootstrap/lib/Nav';
-import Navbar from 'react-bootstrap/lib/Navbar';
-import NavItem  from 'react-bootstrap/lib/NavItem';
+import Button  from 'react-bootstrap/lib/Button';
+import Col  from 'react-bootstrap/lib/Col';
+import Form  from 'react-bootstrap/lib/Form';
+import FormControl  from 'react-bootstrap/lib/FormControl';
+import Label  from 'react-bootstrap/lib/Label';
+
+
+
 
 class SearchBar extends Component {
 
@@ -11,33 +15,19 @@ class SearchBar extends Component {
       const {texttype, searchText, onInptChange, onBtnClick, searchTerm} = this.props;
 
     return (
-          <div className="container">
-                  <div className="row py1">    
-                      <h3>
-                          <label>{texttype}</label>
-                      </h3>
-                  </div>
-                  <div className="row py2">
-                      <p2>
-
-                            <div className="col-xs-6">
-                                  <input type="text" onChange={onInptChange} value={searchTerm}></input>
-                            </div>
-                            <div className="col-xs-6">
-                                  <button onClick={onBtnClick} >{searchText}</button>
-                            </div>
-                     </p2>
-                  </div>
-          </div>
+                  <Form horizontal>
+                            <Col sm={2} md={2}>
+                                <h4><Label bsStyle="default" bsSize="large">{texttype}</Label></h4>
+                            </Col>
+                            <Col sm={8} md={7}>
+                                <FormControl type="text" bsStyle="success" onChange={onInptChange} value={searchTerm} bsSize="large" ></FormControl>
+                            </Col>
+                            <Col sm={4} md={3}>
+                                <Button type="button" onClick={onBtnClick} bsStyle="danger" bsSize="large" >{searchText}</Button>
+                            </Col>
+                </Form>
     );
   }
 }
 
 export default SearchBar;
-
-
-
- /*                           <div className="col-xs-4">
-                                <label>{textBefore}</label>
-                            </div>
-*/

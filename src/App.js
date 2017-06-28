@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-import "bootswatch/united/bootstrap.css";
+import "bootswatch/darkly/bootstrap.css";
 
 import Grid  from 'react-bootstrap/lib/Grid';
-import Nav from 'react-bootstrap/lib/Nav';
-import Navbar from 'react-bootstrap/lib/Navbar';
-import NavItem  from 'react-bootstrap/lib/NavItem';
+import Row  from 'react-bootstrap/lib/Grid';
+import Col  from 'react-bootstrap/lib/Col';
+import PageHeader  from 'react-bootstrap/lib/PageHeader';
+import Image  from 'react-bootstrap/lib/Image';
+import Nav  from 'react-bootstrap/lib/Nav';
+import Label  from 'react-bootstrap/lib/Label';
+import Navbar  from 'react-bootstrap/lib/Navbar';
+import Jumbotron  from 'react-bootstrap/lib/Jumbotron';
 
 import SearchBar from './SearchBar'
 import CostCalc from './CostCalc'
+import ChannelStatisticsBar from './ChannelStatisticsBar'
 
 import YTSearchTerm from './youtube-api-search-term';
 import YTChannels from './youtube-api-channels';
@@ -82,27 +88,6 @@ class App extends Component {
     /*-----------------PLAYLISTS API*/
     
     /*-----------------CHANNELS API*/
-    handleGetChannelDetails(channelID) {
-      const indexOfSlash = channelID.lastIndexOf('/');
-      const ID = channelID.slice(indexOfSlash+1);
-      console.log(ID);
-      YTChannels({key: API_KEY, id: ID}, 
-                (data) => {     
-                this.setState({ChannelData: data});
-
-                this.setState({channelName: data.Snippet.title});
-
-                this.handleGetPlaylistsDetails({channelID : data.Snippet.id});
-                this.handleGetActivitiesDetails({channelID: data.Snippet.id});
-              });
-       this.setState({selectedVideo: null, videos: [], searchTerm: '', videoData: null, videoID: '', channelID: ID});
-       
-    }
-
-    handleInputChannelsChange(key, event) {
-        this.setState({[key] : event.target.value});
-    }
-
     handleGetChannelDetailsFromName(channelName) {
       YTChannelsFromName({key: API_KEY, forUsername: channelName}, 
                 (data) => {     
@@ -116,6 +101,36 @@ class App extends Component {
        this.setState({selectedVideo: null, videos: [], searchTerm: '', videoData: null, videoID: ''});
        
     }
+
+    handleGetChannelDetails(channelID) {
+      const indexOfSlash = channelID.lastIndexOf('/'); 
+      const BeforeId = channelID.slice(0, indexOfSlash); // 'https://www.youtube.com/channel'
+      const SecondindexOfSlash = BeforeId.lastIndexOf('/');
+      const typeSearch = BeforeId.slice(SecondindexOfSlash+1);// user or channel
+      const ID = channelID.slice(indexOfSlash+1);
+      if(typeSearch === 'channel')
+      {
+        YTChannels({key: API_KEY, id: ID}, 
+                    (data) => {     
+                    this.setState({ChannelData: data});
+
+                    this.setState({channelName: data.Snippet.title});
+
+                    this.handleGetPlaylistsDetails({channelID : data.Snippet.id});
+                    this.handleGetActivitiesDetails({channelID: data.Snippet.id});
+                });
+        this.setState({selectedVideo: null, videos: [], searchTerm: '', videoData: null, videoID: '', channelID: ID});
+      } else {
+          this.handleGetChannelDetailsFromName(ID);
+      }
+       
+    }
+
+    handleInputChannelsChange(key, event) {
+        this.setState({[key] : event.target.value});
+    }
+
+
 
      handleInputChannelsNameChange(key, event) {
         this.setState({[key] : event.target.value});
@@ -202,119 +217,73 @@ class App extends Component {
     const {searchTerm, videos, selectedVideo, ChannelData, channelID, channelName, videoID, videoId_Array, videoData, playlistData, activitiesData} = this.state;
     
      return (
-                    
-                    <div className="container">
-                            <div className="row"> 
-
-                            </div>
-                        <div className="row">
-                                <div className="col-md-8 col-md-offset-2" Color="lightblue">
-                                    <h1 className="brand-heading" align="center">
-                                       Стоимость рекламы на Youtube
-                                    </h1> 
-                                    <p1 class="intro-text">
-					                    узнай, сколько должна стоить реклама в твоих видео
-				                    </p1>
-                                </div>
-                        </div>
-                        <div className="row"> 
+                   <Grid fluid>
+                     
+                        <Row>
+                                    <h1>
+                                        <Label bsStyle="warning" bs>
+                                            VLOG
+                                        </Label>
+                                        <Label bsStyle="info">
+                                            STOCK
+                                        </Label>
+                                    </h1>
+                        </Row>
+                        <Row>
+                                <PageHeader fixedTop="true"> 
+                                    <h1> Стоимость рекламы на Youtube 
+                                    </h1>
+                                    <small>
+                                        узнай, сколько должна стоить реклама в твоих видео
+                                    </small>
+                                 </PageHeader>
+                        </Row>
+                        <Row> 
                                 <SearchBar 
-                                    texttype="Введите адрес канала"
+                                    texttype="Введите канал"
                                     searchText="Рассчитать стоимость рекламы"
                                     onInptChange={this.handleInputChannelsChange.bind(this, 'channelID')}
                                     onBtnClick={this.handleGetChannelDetails.bind(this, channelID)}
                                     value={channelID}
                                 />
-                        </div>
- 
-                        <div className="row">
-                            <div className="clearfix">
-                            {selectedVideo ? 
-                                (
-                                <div className="col col-8 px1 py2">
-                                <iframe width="1024" height="768" src={selectedVideo} frameBorder="0" title="selectedVideo" allowFullScreen></iframe> 
-                                </div>
-                                ) : null}
-                            
+                        </Row>
                             {ChannelData ? 
                                 (
-                                <div className="clearfix">
-                                    <div className="container">
+                                    <Row>
                                         {ChannelData.map((channel, index) => {
-                                                const publishedCut = channel.snippet.publishedAt.slice(0,10);
-                                        
                                                 return (
-                                                    <div className = "row">   
-                                                        <div className="col-xs-6">         
-                                                            <div key={index}>
-                                                                <h1>Канал : {channel.snippet.title}</h1>
-
-                                                                <img src={channel.snippet.thumbnails.medium.url}
-                                                                    width="250" height="150" alt="video-img"
-                                                                ></img> 
-
-                                                                {channel.snippet.description ? 
-                                                                (    
-                                                                    <div>     
-                                                                        <h3> Описание канала: </h3><div>{channel.snippet.description}</div>
-                                                                    </div>
-                                                                ) : null}
-                                                                {channel.snippet.country ? 
-                                                                (    
-                                                                    <div>                                                                 
-                                                                        <h3> Страна:</h3><div> {channel.snippet.country}</div>
-                                                                    </div>                                                                 
-                                                                ) : null}
-                                                                {(channel.snippet.viewCount !== 0) ? 
-                                                                (       
-                                                                    <div>                                                                 
-                                                                        <h3> Просмотров:</h3><div> {channel.statistics.viewCount} </div>
-                                                                    </div>                                                                 
-                                                                ) : null}
-                                                                {(channel.statistics.commentCount !== 0) ? 
-                                                                ( 
-                                                                    <div> 
-                                                                        <h3> Комментариев:</h3><div> {channel.statistics.commentCount}</div>
-                                                                    </div> 
-                                                                ) : null}
-                                                                {(channel.statistics.subscriberCount !== 0) ? 
-                                                                ( 
-                                                                    <div> 
-                                                                        <h3> Подписок:</h3><div>{channel.statistics.subscriberCount}</div>
-                                                                    </div> 
-                                                                ) : null}   
-                                                                {(channel.statistics.videoCount !== 0) ? 
-                                                                (   
-                                                                    <div>                                                  
-                                                                        <h3> Число видео:</h3><div>{channel.statistics.videoCount}</div>
-                                                                    </div> 
-                                                                ) : null}  
-                                                                {(channel.statistics.publishedAt !== 0) ? 
-                                                                ( 
-                                                                    <div>
-                                                                        <h3> Опубликовано:</h3><div> {publishedCut} </div>            
-                                                                    </div>
-                                                                ) : null}  
-                                                            </div> 
-                                                        </div>
-                                                        <div className="col-xs-6"> 
-                                                                        <CostCalc
-                                                                        viewsSum = {channel.statistics.viewCount}
-                                                                        videosSum = {channel.statistics.videoCount}
+                                                        <Grid>
+                                                            <Row key={index}>
+                                                                <h1>Итоги расчета стоимости : {channel.snippet.title}</h1>
+                                                            </Row>
+                                                            <Row>
+                                                                 <Nav>
+                                                                    <Image rounded="true" src={channel.snippet.thumbnails.medium.url}
+                                                                            width="250" height="150" alt="video-img"
+                                                                    circle />
+                                                                </Nav>
+                                                            </Row>
+                                                            <Row>
+                                                                    <Col sm={6} md={6}>
+                                                                        <ChannelStatisticsBar
+                                                                                channel = {channel}
                                                                         />
-
-                                                        </div>
-                                                    </div>        
+                                                                    </Col>
+                                                                    <Col sm={6} md={6}>
+                                                                        <CostCalc
+                                                                                viewsSum = {channel.statistics.viewCount}
+                                                                                videosSum = {channel.statistics.videoCount}
+                                                                        />
+                                                                    </Col>
+                                                            </Row> 
+                                                        </Grid>
                                                     );
                                                 }) 
                                         }
-                                    </div>
-                                </div>
+                                    </Row>
                                 ) : null
                             }
-                            </div>
-                        </div>
-                     </div>
+                    </Grid>
             );
     }
 }
@@ -322,7 +291,15 @@ export default App;
 
 /*
                         
-                         
+
+
+                            {selectedVideo ? 
+                                (
+                                <div className="col col-8 px1 py2">
+                                <iframe width="1024" height="768" src={selectedVideo} frameBorder="0" title="selectedVideo" allowFullScreen></iframe> 
+                                </div>
+                                ) : null}
+
 */
 /*
 
