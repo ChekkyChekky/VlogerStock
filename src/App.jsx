@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "bootswatch/darkly/bootstrap.css";
+import ReactDOM from 'react-dom';
 
 import Grid  from 'react-bootstrap/lib/Grid';
 import Row  from 'react-bootstrap/lib/Grid';
@@ -287,7 +287,12 @@ class App extends Component {
             );
     }
 }
-export default App;
+
+
+ReactDOM.render(
+    <App />,
+    document.getElementById("container")
+)
 
 /*
                         
