@@ -24,50 +24,50 @@ class ChannelStatisticsBar extends Component {
                 <Table bordered responsive>
                     <thead>
                             <tr>
-                                <th><h4><Label bsStyle="default" bsSize="large">Параметр</Label></h4> </th>
-                                <th><h4><Label bsStyle="default" bsSize="large">Значение</Label></h4></th>
+                                <th><h4><Label bsStyle="default" bsSize="small">Параметр</Label></h4> </th>
+                                <th><h4><Label bsStyle="default" bsSize="small">Значение</Label></h4></th>
                             </tr>
                     </thead>
                     <tbody>
                             {channel.snippet.country ? 
                             (  
                                 <tr>
-                                    <td><h4><Label bsStyle="info" bsSize="large">Страна</Label></h4></td>
-                                    <td><h4><Label bsStyle="success" bsSize="large"> {channel.snippet.country}</Label></h4></td>
+                                    <td><h4><Label bsStyle="info" bsSize="small">Страна</Label></h4></td>
+                                    <td><h4><Label bsStyle="success" bsSize="small"> {channel.snippet.country}</Label></h4></td>
                                 </tr>
                                 ) : null
                             }
                             {(channel.snippet.viewCount !== 0) ? 
                             (  
                                 <tr>
-                                    <td><h4><Label bsStyle="info" bsSize="large">Просмотров</Label></h4></td>
-                                    <td><h4><Label bsStyle="success" bsSize="large">{viewNew}</Label></h4></td>
+                                    <td><h4><Label bsStyle="info" bsSize="small">Просмотров</Label></h4></td>
+                                    <td><h4><Label bsStyle="success" bsSize="small">{viewNew}</Label></h4></td>
                                 </tr>
                             ) : null
                             }
                             {(channel.snippet.commentCount !== 0) ? 
                             (  
                                 <tr>
-                                    <td><h4><Label bsStyle="info" bsSize="large">Комментариев</Label></h4></td>
-                                    <td> <h4><Label bsStyle="success" bsSize="large">{commentNew}</Label></h4></td>
+                                    <td><h4><Label bsStyle="info" bsSize="small">Комментариев</Label></h4></td>
+                                    <td> <h4><Label bsStyle="success" bsSize="small">{commentNew}</Label></h4></td>
                                 </tr>
                             ) : null
                             }
                             {(channel.snippet.subscriberCount !== 0) ? 
                             (  
                                 <tr>
-                                    <td><h4><Label bsStyle="info" bsSize="large">Подписок</Label></h4></td>
-                                    <td><h4><Label bsStyle="success" bsSize="large"> {subscriberNew}</Label></h4></td>
+                                    <td><h4><Label bsStyle="info" bsSize="small">Подписок</Label></h4></td>
+                                    <td><h4><Label bsStyle="success" bsSize="small"> {subscriberNew}</Label></h4></td>
                                 </tr>
                             ) : null
                             }
                                 <tr>
-                                    <td><h4><Label bsStyle="info" bsSize="large">Число видео</Label></h4></td>
-                                    <td><h4><Label bsStyle="success" bsSize="large"> {videoNew}</Label></h4></td>
+                                    <td><h4><Label bsStyle="info" bsSize="small">Число видео</Label></h4></td>
+                                    <td><h4><Label bsStyle="success" bsSize="small"> {videoNew}</Label></h4></td>
                                 </tr>
                                 <tr>
-                                    <td><h4><Label bsStyle="info" bsSize="large">Опубликовано</Label></h4></td>
-                                    <td><h4><Label bsStyle="success" bsSize="large"> {publishedCut}</Label></h4></td>
+                                    <td><h4><Label bsStyle="info" bsSize="small">Опубликовано</Label></h4></td>
+                                    <td><h4><Label bsStyle="success" bsSize="small"> {publishedCut}</Label></h4></td>
                                 </tr>
                     </tbody>
                 </Table>

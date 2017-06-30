@@ -364,78 +364,50 @@
 
 
 	            return _react2.default.createElement(
-	                _Grid2.default,
-	                { fluid: true },
+	                'div',
+	                null,
 	                _react2.default.createElement(
 	                    _Grid2.default,
 	                    null,
 	                    _react2.default.createElement(
-	                        'h1',
-	                        null,
-	                        _react2.default.createElement(
-	                            _Label2.default,
-	                            { bsStyle: 'warning', bs: true },
-	                            'VLOG'
-	                        ),
-	                        _react2.default.createElement(
-	                            _Label2.default,
-	                            { bsStyle: 'info' },
-	                            'STOCK'
-	                        )
+	                        _Col2.default,
+	                        { xs: 10, sm: 8, md: 8, lg: 6, xsOffset: 1 },
+	                        _react2.default.createElement(_SearchBar2.default, {
+	                            texttype: '',
+	                            searchText: '\u041E\u041A',
+	                            onInptChange: this.handleInputChannelsChange.bind(this, 'channelID'),
+	                            onBtnClick: this.handleGetChannelDetails.bind(this, channelID),
+	                            value: channelID
+	                        })
 	                    )
-	                ),
-	                _react2.default.createElement(
-	                    _Grid2.default,
-	                    null,
-	                    _react2.default.createElement(
-	                        _PageHeader2.default,
-	                        { fixedTop: 'true' },
-	                        _react2.default.createElement(
-	                            'h1',
-	                            null,
-	                            ' \u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0440\u0435\u043A\u043B\u0430\u043C\u044B \u043D\u0430 Youtube'
-	                        ),
-	                        _react2.default.createElement(
-	                            'small',
-	                            null,
-	                            '\u0443\u0437\u043D\u0430\u0439, \u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0434\u043E\u043B\u0436\u043D\u0430 \u0441\u0442\u043E\u0438\u0442\u044C \u0440\u0435\u043A\u043B\u0430\u043C\u0430 \u0432 \u0442\u0432\u043E\u0438\u0445 \u0432\u0438\u0434\u0435\u043E'
-	                        )
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    _Grid2.default,
-	                    null,
-	                    _react2.default.createElement(_SearchBar2.default, {
-	                        texttype: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043A\u0430\u043D\u0430\u043B',
-	                        searchText: '\u0420\u0430\u0441\u0441\u0447\u0438\u0442\u0430\u0442\u044C \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0440\u0435\u043A\u043B\u0430\u043C\u044B',
-	                        onInptChange: this.handleInputChannelsChange.bind(this, 'channelID'),
-	                        onBtnClick: this.handleGetChannelDetails.bind(this, channelID),
-	                        value: channelID
-	                    })
 	                ),
 	                ChannelData ? _react2.default.createElement(
-	                    _Grid2.default,
+	                    'div',
 	                    null,
 	                    ChannelData.map(function (channel, index) {
 	                        return _react2.default.createElement(
-	                            _Grid2.default,
+	                            'div',
 	                            null,
 	                            _react2.default.createElement(
 	                                _Grid2.default,
 	                                { key: index },
 	                                _react2.default.createElement(
-	                                    'h1',
-	                                    null,
-	                                    '\u0418\u0442\u043E\u0433\u0438 \u0440\u0430\u0441\u0447\u0435\u0442\u0430 \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u0438 : ',
-	                                    channel.snippet.title
+	                                    _Col2.default,
+	                                    { xs: 12, sm: 12, md: 9, lg: 8 },
+	                                    _react2.default.createElement(
+	                                        'h3',
+	                                        null,
+	                                        '\u0418\u0442\u043E\u0433\u0438 \u0440\u0430\u0441\u0447\u0435\u0442\u0430 \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u0438 : ',
+	                                        channel.snippet.title
+	                                    )
 	                                )
 	                            ),
 	                            _react2.default.createElement(
 	                                _Grid2.default,
 	                                null,
 	                                _react2.default.createElement(
-	                                    _Nav2.default,
-	                                    null,
+	                                    _Col2.default,
+	                                    { xs: 12, sm: 12, md: 9, lg: 8 },
 	                                    _react2.default.createElement(_Image2.default, { rounded: 'true', src: channel.snippet.thumbnails.medium.url,
 	                                        width: '250', height: '150', alt: 'video-img',
 	                                        circle: true })
@@ -446,14 +418,18 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Col2.default,
-	                                    { sm: 6, md: 6 },
+	                                    { xs: 12, sm: 12, md: 10, lg: 8 },
 	                                    _react2.default.createElement(_ChannelStatisticsBar2.default, {
 	                                        channel: channel
 	                                    })
-	                                ),
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                _Grid2.default,
+	                                null,
 	                                _react2.default.createElement(
 	                                    _Col2.default,
-	                                    { sm: 6, md: 6 },
+	                                    { xs: 12, sm: 12, md: 10, lg: 8 },
 	                                    _react2.default.createElement(_CostCalc2.default, {
 	                                        viewsSum: channel.statistics.viewCount,
 	                                        videosSum: channel.statistics.videoCount
@@ -471,6 +447,29 @@
 	}(_react.Component);
 
 	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById("container"));
+
+	/*         <Row>
+	                 <PageHeader fixedTop="true"> 
+	                     <h1> Стоимость рекламы на Youtube 
+	                     </h1>
+	                     <small>
+	                         узнай, сколько должна стоить реклама в твоих видео
+	                     </small>
+	                  </PageHeader>
+	         </Row>
+	*/
+	/*
+	                       <Row>
+	                                    <h1>
+	                                        <Label bsStyle="warning" bs>
+	                                            VLOG
+	                                        </Label>
+	                                        <Label bsStyle="info">
+	                                            STOCK
+	                                        </Label>
+	                                    </h1>
+	                        </Row>
+	*/
 
 	/*
 	                        
@@ -28789,25 +28788,14 @@
 	                { horizontal: true },
 	                _react2.default.createElement(
 	                    _Col2.default,
-	                    { sm: 2, md: 2 },
-	                    _react2.default.createElement(
-	                        'h4',
-	                        null,
-	                        _react2.default.createElement(
-	                            _Label2.default,
-	                            { bsStyle: 'default', bsSize: 'large' },
-	                            texttype
-	                        )
-	                    )
+	                    { sm: 10, md: 10, xs: 10, lg: 8 },
+	                    _react2.default.createElement(_FormControl2.default, { type: 'text', bsStyle: 'default', bsSize: 'large', onChange: onInptChange,
+	                        value: searchTerm,
+	                        placeholder: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441 YouTube-\u043A\u0430\u043D\u0430\u043B\u0430' })
 	                ),
 	                _react2.default.createElement(
 	                    _Col2.default,
-	                    { sm: 8, md: 7 },
-	                    _react2.default.createElement(_FormControl2.default, { type: 'text', bsStyle: 'success', onChange: onInptChange, value: searchTerm, bsSize: 'large' })
-	                ),
-	                _react2.default.createElement(
-	                    _Col2.default,
-	                    { sm: 4, md: 3 },
+	                    { sm: 1, md: 1, xs: 1, lg: 1 },
 	                    _react2.default.createElement(
 	                        _Button2.default,
 	                        { type: 'button', onClick: onBtnClick, bsStyle: 'danger', bsSize: 'large' },
@@ -29730,7 +29718,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'default', bsSize: 'large' },
+	                                    { bsStyle: 'default', bsSize: 'sm' },
 	                                    '\u0422\u0438\u043F \u0440\u0435\u043A\u043B\u0430\u043C\u044B'
 	                                )
 	                            )
@@ -29743,7 +29731,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'default', bsSize: 'large' },
+	                                    { bsStyle: 'default', bsSize: 'sm' },
 	                                    '\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C,\u0440\u0443\u0431.'
 	                                )
 	                            )
@@ -29764,7 +29752,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'info', bsSize: 'large' },
+	                                    { bsStyle: 'info', bsSize: 'sm' },
 	                                    '\u0417\u0430\u043A\u0430\u0437\u043D\u043E\u0439 \u0440\u043E\u043B\u0438\u043A'
 	                                )
 	                            )
@@ -29777,7 +29765,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'success', bsSize: 'large' },
+	                                    { bsStyle: 'success', bsSize: 'sm' },
 	                                    ' ',
 	                                    resultNew
 	                                )
@@ -29795,7 +29783,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'info', bsSize: 'large' },
+	                                    { bsStyle: 'info', bsSize: 'sm' },
 	                                    '\u0418\u043D\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044F'
 	                                )
 	                            )
@@ -29808,7 +29796,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'success', bsSize: 'large' },
+	                                    { bsStyle: 'success', bsSize: 'sm' },
 	                                    result_product_placementNew
 	                                )
 	                            )
@@ -29825,7 +29813,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'info', bsSize: 'large' },
+	                                    { bsStyle: 'info', bsSize: 'sm' },
 	                                    '\u0420\u0435\u043A\u043B\u0430\u043C\u043D\u043E\u0435 \u0443\u043F\u043E\u043C\u0438\u043D\u0430\u043D\u0438\u0435(\u043D\u0430\u0447\u0430\u043B\u043E)'
 	                                )
 	                            )
@@ -29838,7 +29826,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'success', bsSize: 'large' },
+	                                    { bsStyle: 'success', bsSize: 'sm' },
 	                                    result_30sec_promo_startNew
 	                                )
 	                            )
@@ -29855,7 +29843,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'info', bsSize: 'large' },
+	                                    { bsStyle: 'info', bsSize: 'sm' },
 	                                    '\u0420\u0435\u043A\u043B\u0430\u043C\u043D\u043E\u0435 \u0443\u043F\u043E\u043C\u0438\u043D\u0430\u043D\u0438\u0435(\u043A\u043E\u043D\u0435\u0446)'
 	                                )
 	                            )
@@ -29869,7 +29857,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'success', bsSize: 'large' },
+	                                    { bsStyle: 'success', bsSize: 'sm' },
 	                                    result_30sec_promo_endNew
 	                                )
 	                            )
@@ -30069,7 +30057,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'default', bsSize: 'large' },
+	                                    { bsStyle: 'default', bsSize: 'small' },
 	                                    '\u041F\u0430\u0440\u0430\u043C\u0435\u0442\u0440'
 	                                )
 	                            ),
@@ -30083,7 +30071,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'default', bsSize: 'large' },
+	                                    { bsStyle: 'default', bsSize: 'small' },
 	                                    '\u0417\u043D\u0430\u0447\u0435\u043D\u0438\u0435'
 	                                )
 	                            )
@@ -30104,7 +30092,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'info', bsSize: 'large' },
+	                                    { bsStyle: 'info', bsSize: 'small' },
 	                                    '\u0421\u0442\u0440\u0430\u043D\u0430'
 	                                )
 	                            )
@@ -30117,7 +30105,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'success', bsSize: 'large' },
+	                                    { bsStyle: 'success', bsSize: 'small' },
 	                                    ' ',
 	                                    channel.snippet.country
 	                                )
@@ -30135,7 +30123,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'info', bsSize: 'large' },
+	                                    { bsStyle: 'info', bsSize: 'small' },
 	                                    '\u041F\u0440\u043E\u0441\u043C\u043E\u0442\u0440\u043E\u0432'
 	                                )
 	                            )
@@ -30148,7 +30136,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'success', bsSize: 'large' },
+	                                    { bsStyle: 'success', bsSize: 'small' },
 	                                    viewNew
 	                                )
 	                            )
@@ -30165,7 +30153,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'info', bsSize: 'large' },
+	                                    { bsStyle: 'info', bsSize: 'small' },
 	                                    '\u041A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0435\u0432'
 	                                )
 	                            )
@@ -30179,7 +30167,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'success', bsSize: 'large' },
+	                                    { bsStyle: 'success', bsSize: 'small' },
 	                                    commentNew
 	                                )
 	                            )
@@ -30196,7 +30184,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'info', bsSize: 'large' },
+	                                    { bsStyle: 'info', bsSize: 'small' },
 	                                    '\u041F\u043E\u0434\u043F\u0438\u0441\u043E\u043A'
 	                                )
 	                            )
@@ -30209,7 +30197,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'success', bsSize: 'large' },
+	                                    { bsStyle: 'success', bsSize: 'small' },
 	                                    ' ',
 	                                    subscriberNew
 	                                )
@@ -30227,7 +30215,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'info', bsSize: 'large' },
+	                                    { bsStyle: 'info', bsSize: 'small' },
 	                                    '\u0427\u0438\u0441\u043B\u043E \u0432\u0438\u0434\u0435\u043E'
 	                                )
 	                            )
@@ -30240,7 +30228,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'success', bsSize: 'large' },
+	                                    { bsStyle: 'success', bsSize: 'small' },
 	                                    ' ',
 	                                    videoNew
 	                                )
@@ -30258,7 +30246,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'info', bsSize: 'large' },
+	                                    { bsStyle: 'info', bsSize: 'small' },
 	                                    '\u041E\u043F\u0443\u0431\u043B\u0438\u043A\u043E\u0432\u0430\u043D\u043E'
 	                                )
 	                            )
@@ -30271,7 +30259,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    _Label2.default,
-	                                    { bsStyle: 'success', bsSize: 'large' },
+	                                    { bsStyle: 'success', bsSize: 'small' },
 	                                    ' ',
 	                                    publishedCut
 	                                )

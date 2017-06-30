@@ -217,9 +217,88 @@ class App extends Component {
     const {searchTerm, videos, selectedVideo, ChannelData, channelID, channelName, videoID, videoId_Array, videoData, playlistData, activitiesData} = this.state;
     
      return (
-                   <Grid fluid>
-                     
-                        <Row>
+         <div>
+                        <Row> 
+                            <Col xs={10} sm={8} md={8} lg={6} xsOffset={1} >
+                                <SearchBar 
+                                    texttype=""
+                                    searchText="ОК"
+                                    onInptChange={this.handleInputChannelsChange.bind(this, 'channelID')}
+                                    onBtnClick={this.handleGetChannelDetails.bind(this, channelID)}
+                                    value={channelID}
+                                />
+                            </Col>
+                        </Row>
+
+                            {ChannelData ? 
+                                (
+                                    <div>
+                                        { ChannelData.map((channel, index) => {
+                                                return (
+                                                    <div>
+                                                            <Row key={index}>
+                                                                <Col xs={12} sm={12} md={9} lg={8}>
+                                                                <h3>Итоги расчета стоимости : {channel.snippet.title}</h3>
+                                                                </Col>
+                                                            </Row>
+
+                                                            <Row>
+                                                                    <Col xs={12} sm={12} md={9} lg={8}>
+                                                                        <Image rounded="true" src={channel.snippet.thumbnails.medium.url}
+                                                                                width="250" height="150" alt="video-img"
+                                                                        circle />
+                                                                    </Col>
+                                                            </Row>
+                                                                <Row>
+                                                                    <Col xs={12} sm={12} md={10} lg={8}> 
+                                                                        <ChannelStatisticsBar
+                                                                            channel = {channel}
+                                                                        />
+                                                                    </Col>
+                                                                </Row>
+                                                                <Row>
+                                                                    <Col xs={12} sm={12} md={10} lg={8}>
+                                                                        <CostCalc
+                                                                                viewsSum = {channel.statistics.viewCount}
+                                                                                videosSum = {channel.statistics.videoCount}
+                                                                        />
+                                                                    </Col>
+                                                                </Row>
+
+                                                        </div>
+                                                    );
+                                                }) 
+                                        }
+                                    </div>
+                                ) : null
+                            }
+            
+            </div>
+            );
+
+    }
+}
+
+
+
+ReactDOM.render(
+    <App />,
+    document.getElementById("container")
+)
+
+
+               /*         <Row>
+                                <PageHeader fixedTop="true"> 
+                                    <h1> Стоимость рекламы на Youtube 
+                                    </h1>
+                                    <small>
+                                        узнай, сколько должна стоить реклама в твоих видео
+                                    </small>
+                                 </PageHeader>
+                        </Row>
+*/
+/*
+                       <Row>
                                     <h1>
                                         <Label bsStyle="warning" bs>
                                             VLOG
@@ -229,70 +308,8 @@ class App extends Component {
                                         </Label>
                                     </h1>
                         </Row>
-                        <Row>
-                                <PageHeader fixedTop="true"> 
-                                    <h1> Стоимость рекламы на Youtube 
-                                    </h1>
-                                    <small>
-                                        узнай, сколько должна стоить реклама в твоих видео
-                                    </small>
-                                 </PageHeader>
-                        </Row>
-                        <Row> 
-                                <SearchBar 
-                                    texttype="Введите канал"
-                                    searchText="Рассчитать стоимость рекламы"
-                                    onInptChange={this.handleInputChannelsChange.bind(this, 'channelID')}
-                                    onBtnClick={this.handleGetChannelDetails.bind(this, channelID)}
-                                    value={channelID}
-                                />
-                        </Row>
-                            {ChannelData ? 
-                                (
-                                    <Row>
-                                        {ChannelData.map((channel, index) => {
-                                                return (
-                                                        <Grid>
-                                                            <Row key={index}>
-                                                                <h1>Итоги расчета стоимости : {channel.snippet.title}</h1>
-                                                            </Row>
-                                                            <Row>
-                                                                 <Nav>
-                                                                    <Image rounded="true" src={channel.snippet.thumbnails.medium.url}
-                                                                            width="250" height="150" alt="video-img"
-                                                                    circle />
-                                                                </Nav>
-                                                            </Row>
-                                                            <Row>
-                                                                    <Col sm={6} md={6}>
-                                                                        <ChannelStatisticsBar
-                                                                                channel = {channel}
-                                                                        />
-                                                                    </Col>
-                                                                    <Col sm={6} md={6}>
-                                                                        <CostCalc
-                                                                                viewsSum = {channel.statistics.viewCount}
-                                                                                videosSum = {channel.statistics.videoCount}
-                                                                        />
-                                                                    </Col>
-                                                            </Row> 
-                                                        </Grid>
-                                                    );
-                                                }) 
-                                        }
-                                    </Row>
-                                ) : null
-                            }
-                    </Grid>
-            );
-    }
-}
+*/
 
-
-ReactDOM.render(
-    <App />,
-    document.getElementById("container")
-)
 
 /*
                         

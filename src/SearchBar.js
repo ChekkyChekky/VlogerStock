@@ -15,17 +15,17 @@ class SearchBar extends Component {
       const {texttype, searchText, onInptChange, onBtnClick, searchTerm} = this.props;
 
     return (
-                  <Form horizontal>
-                            <Col sm={2} md={2}>
-                                <h4><Label bsStyle="default" bsSize="large">{texttype}</Label></h4>
-                            </Col>
-                            <Col sm={8} md={7}>
-                                <FormControl type="text" bsStyle="success" onChange={onInptChange} value={searchTerm} bsSize="large" ></FormControl>
-                            </Col>
-                            <Col sm={4} md={3}>
+                    <Form horizontal>
+                        <Col sm={10} md={10} xs={10} lg={8}>
+                                <FormControl type="text" bsStyle="default" bsSize="large" onChange={onInptChange}
+                                value={searchTerm}  
+                                placeholder="Введите адрес YouTube-канала" />
+                        </Col>
+                        <Col sm={1} md={1} xs ={1} lg={1}>
                                 <Button type="button" onClick={onBtnClick} bsStyle="danger" bsSize="large" >{searchText}</Button>
-                            </Col>
-                </Form>
+                        </Col>
+                    </Form>
+                
     );
   }
 }

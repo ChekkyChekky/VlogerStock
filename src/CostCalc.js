@@ -34,26 +34,26 @@ class CostCalc extends Component{
                 <Table bordered responsive>
                     <thead>
                         <tr>
-                            <th><h4><Label bsStyle="default" bsSize="large">Тип рекламы</Label></h4></th>
-                            <th><h4><Label bsStyle="default" bsSize="large">Стоимость,руб.</Label></h4></th>
+                            <th><h4><Label bsStyle="default" bsSize="sm">Тип рекламы</Label></h4></th>
+                            <th><h4><Label bsStyle="default" bsSize="sm">Стоимость,руб.</Label></h4></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><h4><Label bsStyle="info" bsSize="large">Заказной ролик</Label></h4></td>
-                            <td><h4><Label bsStyle="success" bsSize="large"> {resultNew}</Label></h4></td>
+                            <td><h4><Label bsStyle="info" bsSize="sm">Заказной ролик</Label></h4></td>
+                            <td><h4><Label bsStyle="success" bsSize="sm"> {resultNew}</Label></h4></td>
                         </tr>
                         <tr>
-                            <td><h4><Label bsStyle="info" bsSize="large">Интеграция</Label></h4></td>
-                            <td><h4><Label bsStyle="success" bsSize="large">{result_product_placementNew}</Label></h4></td>
+                            <td><h4><Label bsStyle="info" bsSize="sm">Интеграция</Label></h4></td>
+                            <td><h4><Label bsStyle="success" bsSize="sm">{result_product_placementNew}</Label></h4></td>
                         </tr>
                         <tr>
-                            <td><h4><Label bsStyle="info" bsSize="large">Рекламное упоминание(начало)</Label></h4></td>
-                            <td><h4><Label bsStyle="success" bsSize="large">{result_30sec_promo_startNew}</Label></h4></td>
+                            <td><h4><Label bsStyle="info" bsSize="sm">Рекламное упоминание(начало)</Label></h4></td>
+                            <td><h4><Label bsStyle="success" bsSize="sm">{result_30sec_promo_startNew}</Label></h4></td>
                         </tr>
                         <tr>
-                            <td><h4><Label bsStyle="info" bsSize="large">Рекламное упоминание(конец)</Label></h4></td>
-                            <td> <h4><Label bsStyle="success" bsSize="large">{result_30sec_promo_endNew}</Label></h4></td>
+                            <td><h4><Label bsStyle="info" bsSize="sm">Рекламное упоминание(конец)</Label></h4></td>
+                            <td> <h4><Label bsStyle="success" bsSize="sm">{result_30sec_promo_endNew}</Label></h4></td>
                         </tr>
                     </tbody>
                 </Table>
