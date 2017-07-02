@@ -385,9 +385,13 @@
 	                    'div',
 	                    null,
 	                    ChannelData.map(function (channel, index) {
+	                        var bmHumor = false;
+	                        {
+	                            channel.snippet.title == "Бизнес Молодость" ? bmHumor = true : null;
+	                        }
 	                        return _react2.default.createElement(
-	                            'div',
-	                            null,
+	                            _Nav2.default,
+	                            { className: 'myOtstup' },
 	                            _react2.default.createElement(
 	                                _Grid2.default,
 	                                { key: index },
@@ -395,9 +399,9 @@
 	                                    _Col2.default,
 	                                    { xs: 12, sm: 12, md: 9, lg: 8 },
 	                                    _react2.default.createElement(
-	                                        'h3',
+	                                        'h2',
 	                                        null,
-	                                        '\u0418\u0442\u043E\u0433\u0438 \u0440\u0430\u0441\u0447\u0435\u0442\u0430 \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u0438 : ',
+	                                        '\u0418\u0442\u043E\u0433\u0438 \u0440\u0430\u0441\u0447\u0435\u0442\u0430 \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u0438: ',
 	                                        channel.snippet.title
 	                                    )
 	                                )
@@ -409,8 +413,21 @@
 	                                    _Col2.default,
 	                                    { xs: 12, sm: 12, md: 9, lg: 8 },
 	                                    _react2.default.createElement(_Image2.default, { rounded: 'true', src: channel.snippet.thumbnails.medium.url,
-	                                        width: '250', height: '150', alt: 'video-img',
+	                                        alt: 'video-img',
 	                                        circle: true })
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                _Grid2.default,
+	                                { className: 'myOtstup' },
+	                                _react2.default.createElement(
+	                                    _Col2.default,
+	                                    { xs: 12, sm: 12, md: 10, lg: 8 },
+	                                    _react2.default.createElement(_CostCalc2.default, {
+	                                        viewsSum: channel.statistics.viewCount,
+	                                        videosSum: channel.statistics.videoCount,
+	                                        bmHumor: bmHumor
+	                                    })
 	                                )
 	                            ),
 	                            _react2.default.createElement(
@@ -421,18 +438,6 @@
 	                                    { xs: 12, sm: 12, md: 10, lg: 8 },
 	                                    _react2.default.createElement(_ChannelStatisticsBar2.default, {
 	                                        channel: channel
-	                                    })
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                _Grid2.default,
-	                                null,
-	                                _react2.default.createElement(
-	                                    _Col2.default,
-	                                    { xs: 12, sm: 12, md: 10, lg: 8 },
-	                                    _react2.default.createElement(_CostCalc2.default, {
-	                                        viewsSum: channel.statistics.viewCount,
-	                                        videosSum: channel.statistics.videoCount
 	                                    })
 	                                )
 	                            )
@@ -28789,7 +28794,8 @@
 	                _react2.default.createElement(
 	                    _Col2.default,
 	                    { sm: 10, md: 10, xs: 10, lg: 8 },
-	                    _react2.default.createElement(_FormControl2.default, { type: 'text', bsStyle: 'default', bsSize: 'large', onChange: onInptChange,
+	                    _react2.default.createElement(_FormControl2.default, { type: 'text', bsStyle: 'default', bsSize: 'large',
+	                        onChange: onInptChange,
 	                        value: searchTerm,
 	                        placeholder: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441 YouTube-\u043A\u0430\u043D\u0430\u043B\u0430' })
 	                ),
@@ -28798,7 +28804,8 @@
 	                    { sm: 1, md: 1, xs: 1, lg: 1 },
 	                    _react2.default.createElement(
 	                        _Button2.default,
-	                        { type: 'button', onClick: onBtnClick, bsStyle: 'danger', bsSize: 'large' },
+	                        { type: 'button', onClick: onBtnClick, bsStyle: 'danger', bsSize: 'large'
+	                        },
 	                        searchText
 	                    )
 	                )
@@ -29674,7 +29681,8 @@
 
 	        _this.state = {
 	            viewsSum: props.viewsSum,
-	            videosSum: props.videosCount
+	            videosSum: props.videosCount,
+	            bmHumor: false
 	        };
 	        return _this;
 	    }
@@ -29684,7 +29692,8 @@
 	        value: function render() {
 	            var _props = this.props,
 	                viewsSum = _props.viewsSum,
-	                videosSum = _props.videosSum;
+	                videosSum = _props.videosSum,
+	                bmHumor = _props.bmHumor;
 
 	            var cost_per_1000 = 0.5;
 	            var result = Math.round(viewsSum / videosSum * cost_per_1000);
@@ -29738,7 +29747,7 @@
 	                        )
 	                    )
 	                ),
-	                _react2.default.createElement(
+	                !bmHumor ? _react2.default.createElement(
 	                    'tbody',
 	                    null,
 	                    _react2.default.createElement(
@@ -29814,7 +29823,7 @@
 	                                _react2.default.createElement(
 	                                    _Label2.default,
 	                                    { bsStyle: 'info', bsSize: 'sm' },
-	                                    '\u0420\u0435\u043A\u043B\u0430\u043C\u043D\u043E\u0435 \u0443\u043F\u043E\u043C\u0438\u043D\u0430\u043D\u0438\u0435(\u043D\u0430\u0447\u0430\u043B\u043E)'
+	                                    '\u0420\u0435\u043A\u043B\u0430\u043C\u043D\u043E\u0435 \u0443\u043F\u043E\u043C\u0438\u043D\u0430\u043D\u0438\u0435 (\u043D\u0430\u0447\u0430\u043B\u043E)'
 	                                )
 	                            )
 	                        ),
@@ -29844,7 +29853,7 @@
 	                                _react2.default.createElement(
 	                                    _Label2.default,
 	                                    { bsStyle: 'info', bsSize: 'sm' },
-	                                    '\u0420\u0435\u043A\u043B\u0430\u043C\u043D\u043E\u0435 \u0443\u043F\u043E\u043C\u0438\u043D\u0430\u043D\u0438\u0435(\u043A\u043E\u043D\u0435\u0446)'
+	                                    '\u0420\u0435\u043A\u043B\u0430\u043C\u043D\u043E\u0435 \u0443\u043F\u043E\u043C\u0438\u043D\u0430\u043D\u0438\u0435 (\u043A\u043E\u043D\u0435\u0446)'
 	                                )
 	                            )
 	                        ),
@@ -29859,6 +29868,130 @@
 	                                    _Label2.default,
 	                                    { bsStyle: 'success', bsSize: 'sm' },
 	                                    result_30sec_promo_endNew
+	                                )
+	                            )
+	                        )
+	                    )
+	                ) : _react2.default.createElement(
+	                    'tbody',
+	                    null,
+	                    _react2.default.createElement(
+	                        'tr',
+	                        null,
+	                        _react2.default.createElement(
+	                            'td',
+	                            null,
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                _react2.default.createElement(
+	                                    _Label2.default,
+	                                    { bsStyle: 'info', bsSize: 'sm' },
+	                                    '\u0417\u0430\u043A\u0430\u0437\u043D\u043E\u0439 \u0440\u043E\u043B\u0438\u043A'
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'td',
+	                            null,
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                _react2.default.createElement(
+	                                    _Label2.default,
+	                                    { bsStyle: 'danger', bsSize: 'sm' },
+	                                    ' \u0431\u0435\u0441\u0446\u0435\u043D\u043D\u043E'
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'tr',
+	                        null,
+	                        _react2.default.createElement(
+	                            'td',
+	                            null,
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                _react2.default.createElement(
+	                                    _Label2.default,
+	                                    { bsStyle: 'info', bsSize: 'sm' },
+	                                    '\u0418\u043D\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044F'
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'td',
+	                            null,
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                _react2.default.createElement(
+	                                    _Label2.default,
+	                                    { bsStyle: 'danger', bsSize: 'sm' },
+	                                    '\u0431\u0435\u0441\u0446\u0435\u043D\u043D\u043E'
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'tr',
+	                        null,
+	                        _react2.default.createElement(
+	                            'td',
+	                            null,
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                _react2.default.createElement(
+	                                    _Label2.default,
+	                                    { bsStyle: 'info', bsSize: 'sm' },
+	                                    '\u0420\u0435\u043A\u043B\u0430\u043C\u043D\u043E\u0435 \u0443\u043F\u043E\u043C\u0438\u043D\u0430\u043D\u0438\u0435 (\u043D\u0430\u0447\u0430\u043B\u043E)'
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'td',
+	                            null,
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                _react2.default.createElement(
+	                                    _Label2.default,
+	                                    { bsStyle: 'danger', bsSize: 'sm' },
+	                                    '\u0431\u0435\u0441\u0446\u0435\u043D\u043D\u043E'
+	                                )
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'tr',
+	                        null,
+	                        _react2.default.createElement(
+	                            'td',
+	                            null,
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                _react2.default.createElement(
+	                                    _Label2.default,
+	                                    { bsStyle: 'info', bsSize: 'sm' },
+	                                    '\u0420\u0435\u043A\u043B\u0430\u043C\u043D\u043E\u0435 \u0443\u043F\u043E\u043C\u0438\u043D\u0430\u043D\u0438\u0435 (\u043A\u043E\u043D\u0435\u0446)'
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'td',
+	                            null,
+	                            ' ',
+	                            _react2.default.createElement(
+	                                'h4',
+	                                null,
+	                                _react2.default.createElement(
+	                                    _Label2.default,
+	                                    { bsStyle: 'danger', bsSize: 'sm' },
+	                                    '\u0431\u0435\u0441\u0446\u0435\u043D\u043D\u043E'
 	                                )
 	                            )
 	                        )

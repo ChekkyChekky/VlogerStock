@@ -234,21 +234,37 @@ class App extends Component {
                                 (
                                     <div>
                                         { ChannelData.map((channel, index) => {
+                                            let bmHumor = false;
+                                            {(channel.snippet.title == "Бизнес Молодость") ?
+                                                (
+                                                  bmHumor = true
+                                                ) : null
+                                            }
                                                 return (
-                                                    <div>
+                                                    <Nav className="myOtstup">
                                                             <Row key={index}>
                                                                 <Col xs={12} sm={12} md={9} lg={8}>
-                                                                <h3>Итоги расчета стоимости : {channel.snippet.title}</h3>
+                                                                <h2>Итоги расчета стоимости: {channel.snippet.title}</h2>
                                                                 </Col>
                                                             </Row>
 
                                                             <Row>
                                                                     <Col xs={12} sm={12} md={9} lg={8}>
                                                                         <Image rounded="true" src={channel.snippet.thumbnails.medium.url}
-                                                                                width="250" height="150" alt="video-img"
+                                                                                 alt="video-img"
                                                                         circle />
                                                                     </Col>
                                                             </Row>
+                                                                
+                                                                <Row className="myOtstup">
+                                                                    <Col xs={12} sm={12} md={10} lg={8}>
+                                                                        <CostCalc
+                                                                                viewsSum = {channel.statistics.viewCount}
+                                                                                videosSum = {channel.statistics.videoCount}
+                                                                                bmHumor = {bmHumor}
+                                                                        />
+                                                                    </Col>
+                                                                </Row>
                                                                 <Row>
                                                                     <Col xs={12} sm={12} md={10} lg={8}> 
                                                                         <ChannelStatisticsBar
@@ -256,16 +272,8 @@ class App extends Component {
                                                                         />
                                                                     </Col>
                                                                 </Row>
-                                                                <Row>
-                                                                    <Col xs={12} sm={12} md={10} lg={8}>
-                                                                        <CostCalc
-                                                                                viewsSum = {channel.statistics.viewCount}
-                                                                                videosSum = {channel.statistics.videoCount}
-                                                                        />
-                                                                    </Col>
-                                                                </Row>
 
-                                                        </div>
+                                                        </Nav>
                                                     );
                                                 }) 
                                         }

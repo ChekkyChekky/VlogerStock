@@ -17,12 +17,16 @@ class SearchBar extends Component {
     return (
                     <Form horizontal>
                         <Col sm={10} md={10} xs={10} lg={8}>
-                                <FormControl type="text" bsStyle="default" bsSize="large" onChange={onInptChange}
+                                <FormControl type="text" bsStyle="default" bsSize="large"
+                                 onChange={onInptChange}
                                 value={searchTerm}  
                                 placeholder="Введите адрес YouTube-канала" />
                         </Col>
                         <Col sm={1} md={1} xs ={1} lg={1}>
-                                <Button type="button" onClick={onBtnClick} bsStyle="danger" bsSize="large" >{searchText}</Button>
+                                 <Button type="button" onClick={onBtnClick} bsStyle="danger" bsSize="large"
+                                 >{searchText}
+
+                                </Button>
                         </Col>
                     </Form>
                 

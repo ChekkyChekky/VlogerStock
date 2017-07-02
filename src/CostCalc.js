@@ -9,12 +9,13 @@ class CostCalc extends Component{
 
         this.state = {
             viewsSum: props.viewsSum,
-            videosSum: props.videosCount
+            videosSum: props.videosCount,
+            bmHumor: false
         };
     }
 
     render(){
-        const {viewsSum, videosSum} = this.props
+        const {viewsSum, videosSum, bmHumor} = this.props
         const cost_per_1000 = 0.5;
         const result = Math.round( viewsSum / videosSum * cost_per_1000);
         const result_30sec_promo_start = Math.round(result/6);
@@ -38,24 +39,51 @@ class CostCalc extends Component{
                             <th><h4><Label bsStyle="default" bsSize="sm">Стоимость,руб.</Label></h4></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td><h4><Label bsStyle="info" bsSize="sm">Заказной ролик</Label></h4></td>
-                            <td><h4><Label bsStyle="success" bsSize="sm"> {resultNew}</Label></h4></td>
-                        </tr>
-                        <tr>
-                            <td><h4><Label bsStyle="info" bsSize="sm">Интеграция</Label></h4></td>
-                            <td><h4><Label bsStyle="success" bsSize="sm">{result_product_placementNew}</Label></h4></td>
-                        </tr>
-                        <tr>
-                            <td><h4><Label bsStyle="info" bsSize="sm">Рекламное упоминание(начало)</Label></h4></td>
-                            <td><h4><Label bsStyle="success" bsSize="sm">{result_30sec_promo_startNew}</Label></h4></td>
-                        </tr>
-                        <tr>
-                            <td><h4><Label bsStyle="info" bsSize="sm">Рекламное упоминание(конец)</Label></h4></td>
-                            <td> <h4><Label bsStyle="success" bsSize="sm">{result_30sec_promo_endNew}</Label></h4></td>
-                        </tr>
-                    </tbody>
+
+                        
+                        {!bmHumor ?
+                                (
+                                <tbody>
+                                    <tr>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">Заказной ролик</Label></h4></td>
+                                        <td><h4><Label bsStyle="success" bsSize="sm"> {resultNew}</Label></h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">Интеграция</Label></h4></td>
+                                        <td><h4><Label bsStyle="success" bsSize="sm">{result_product_placementNew}</Label></h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">Рекламное упоминание (начало)</Label></h4></td>
+                                        <td><h4><Label bsStyle="success" bsSize="sm">{result_30sec_promo_startNew}</Label></h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">Рекламное упоминание (конец)</Label></h4></td>
+                                        <td> <h4><Label bsStyle="success" bsSize="sm">{result_30sec_promo_endNew}</Label></h4></td>
+                                    </tr>
+                                </tbody>
+                                )
+                            :
+                            (
+                                <tbody>
+                                    <tr>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">Заказной ролик</Label></h4></td>
+                                        <td><h4><Label bsStyle="danger" bsSize="sm"> бесценно</Label></h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">Интеграция</Label></h4></td>
+                                        <td><h4><Label bsStyle="danger" bsSize="sm">бесценно</Label></h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">Рекламное упоминание (начало)</Label></h4></td>
+                                        <td><h4><Label bsStyle="danger" bsSize="sm">бесценно</Label></h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">Рекламное упоминание (конец)</Label></h4></td>
+                                        <td> <h4><Label bsStyle="danger" bsSize="sm">бесценно</Label></h4></td>
+                                    </tr>
+                                </tbody>
+                            )
+                        }
                 </Table>
     );
     }
