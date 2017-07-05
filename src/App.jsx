@@ -55,11 +55,22 @@ class App extends Component {
     handleEmailPost() {
 
         if(validator.validate(this.state.emailToSend)){
-            var data = JSON.stringify({
-                email: this.state.emailToSend,
-            });
 
-            //console.log(this.state.emailToSend);
+        var data = JSON.stringify(
+            {
+                email:
+                {
+                    value: this.state.emailToSend
+                }
+            }
+            );
+
+           /* var data = JSON.stringify(
+                {
+                email: this.state.emailToSend
+                });*/
+
+            console.log(this.state.emailToSend);
 
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
@@ -71,11 +82,12 @@ class App extends Component {
             });
     
             xhr.open("POST", "https://vlogstock-a0fe.restdb.io/rest/bloggeremails");
-            xhr.setRequestHeader("content-type", "text");
+            xhr.setRequestHeader("content-type", "application/json");
             xhr.setRequestHeader("x-apikey", "595cca7bafce09e87211ea27");
-            xhr.setRequestHeader("cache-control", "no-cache");
+          //  xhr.setRequestHeader("cache-control", "no-cache");
 
-            xhr.send(this.state.emailToSend);
+            xhr.send(data);
+
             this.setState({emailSuccess : true});
         }
         else{
