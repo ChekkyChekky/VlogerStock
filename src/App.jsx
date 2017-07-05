@@ -267,7 +267,7 @@ class App extends Component {
                             
                                                                 (
                                                                         <Row className="myMiniOtstup">
-                                                                            <Col xs={10} sm={10} md={9} lg={7}  xsOffset={1}>
+                                                                            <Col xs={10} sm={7} md={7} lg={5} xsOffset={1}>
                                                                                     <ModalError
                                                                                             textError = "Неверный формат e-mail"
                                                                                             onBtnClick={this.handleEmailError.bind(this)}
@@ -281,7 +281,7 @@ class App extends Component {
                             {emailSuccess ? 
                                                                 (
                                                                      <Row className="myMiniOtstup">
-                                                                        <Col xs={10} sm={10} md={9} lg={7} xsOffset={1} >
+                                                                        <Col xs={10} sm={7} md={7} lg={5} xsOffset={1} >
                                                                                 <ModalError
                                                                                         textError = "Вы добавлены в базу!"
                                                                                         onBtnClick={this.handleEmailSuccess.bind(this)}
