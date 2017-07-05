@@ -30098,7 +30098,7 @@ var SearchBar = function (_Component) {
 
             return _react2.default.createElement(
                 _Form2.default,
-                { horizontal: true },
+                { horizontal: true, id: 'SearchID' },
                 _react2.default.createElement(
                     _Col2.default,
                     { sm: 10, md: 10, xs: 10, lg: 8 },
@@ -30623,7 +30623,7 @@ var ModalError = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'static-modal' },
+        { className: 'static-modal', id: 'ModalErrorID' },
         _react2.default.createElement(
           _Row2.default,
           null,
@@ -31473,7 +31473,7 @@ var EmailSenderBar = function (_Component) {
 
             return _react2.default.createElement(
                 _Form2.default,
-                { horizontal: true },
+                { horizontal: true, id: 'emailSendID' },
                 _react2.default.createElement(
                     _Col2.default,
                     { sm: 10, md: 10, xs: 10, lg: 8 },

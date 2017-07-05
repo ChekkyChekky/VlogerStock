@@ -15,7 +15,7 @@ class EmailSenderBar extends Component {
       const {sendText, onBtnClick, emailToSend, onInptChange} = this.props;
 
     return (
-                    <Form horizontal>
+                    <Form horizontal id="emailSendID">
                         <Col sm={10} md={10} xs={10} lg={8}>
                                 <FormControl type="text" bsStyle="default" bsSize="large"
                                 onChange={onInptChange}

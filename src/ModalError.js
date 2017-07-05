@@ -15,8 +15,7 @@ class ModalError extends Component {
       const {onBtnClick, textError, buttonText} = this.props;
 
     return (
-                    <div className="static-modal">
-                   
+                    <div className="static-modal" id="ModalErrorID">
                       <Row>
                         <Col sm={12} md={12} xs={12} lg={12} minWidth="250">
                                  <Button type="button" onClick={onBtnClick} bsStyle="warning" bsSize="large">

@@ -15,7 +15,7 @@ class SearchBar extends Component {
       const {searchText, onInptChange, onBtnClick, searchTerm} = this.props;
 
     return (
-                    <Form horizontal>
+                    <Form horizontal id="SearchID">
                         <Col sm={10} md={10} xs={10} lg={8}>
                                 <FormControl type="text" bsStyle="default" bsSize="large"
                                 onChange={onInptChange}
