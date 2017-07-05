@@ -18,9 +18,9 @@ class CostCalc extends Component{
         const {viewsSum, videosSum, bmHumor} = this.props
         const cost_per_1000 = 0.5;
         const result = Math.round( viewsSum / videosSum * cost_per_1000);
-        const result_30sec_promo_start = Math.round(result/6);
-        const result_30sec_promo_end = Math.round(result/10);
-        const result_product_placement = Math.round(result/4);
+        const result_30sec_promo_start = Math.round(result/7);
+        const result_30sec_promo_end = Math.round(result/11);
+        const result_product_placement = Math.round(result/5);
 
         const resultStr = "" + result;
         const resultNew = resultStr.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
@@ -53,11 +53,11 @@ class CostCalc extends Component{
                                         <td><h4><Label bsStyle="success" bsSize="sm">{result_product_placementNew}</Label></h4></td>
                                     </tr>
                                     <tr>
-                                        <td><h4><Label bsStyle="info" bsSize="sm">Рекламное упоминание (начало)</Label></h4></td>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">Упоминание в начале 15 сек.</Label></h4></td>
                                         <td><h4><Label bsStyle="success" bsSize="sm">{result_30sec_promo_startNew}</Label></h4></td>
                                     </tr>
                                     <tr>
-                                        <td><h4><Label bsStyle="info" bsSize="sm">Рекламное упоминание (конец)</Label></h4></td>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">Упоминание в конце 15 сек.</Label></h4></td>
                                         <td> <h4><Label bsStyle="success" bsSize="sm">{result_30sec_promo_endNew}</Label></h4></td>
                                     </tr>
                                 </tbody>

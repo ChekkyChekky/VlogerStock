@@ -1,22 +1,40 @@
+const path = require('path');
+
 module.exports = {
     entry: "./src/App.jsx", // входная точка - исходный файл
     output:{
-        path: "public/js",     // путь к каталогу выходных файлов
+        path: path.resolve(__dirname + "/public/js"),     // путь к каталогу выходных файлов
         filename: "bundle.js"       // название создаваемого файла
     },
     resolve:{   
-        extensions: ["", ".js", ".jsx"] // расширения для загрузки модулей
+        extensions: [".js", ".jsx", '.css', '.scss', '.less'] // расширения для загрузки модулей
     },
     module:{
-        loaders:[   //загрузчики
-            {
-                test: /\.jsx?$/, // определяем тип файлов
-                exclude: /(node_modules)/,
-                loader: ["babel-loader"],
-                query:{
-                    presets:["es2015", "react"]
-                }
-            }
-        ]
+        rules: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader'
+        },
+        {
+            test: /\.jsx$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader'
+        },
+        {
+            test: /\.css$/,
+            loader: ["style-loader", "css-loader"]
+        },
+        {
+            test: /\.scss$/,
+            loader: ["style-loader", "css-loader", "sass-loader"]
+        },
+        {
+            test: /\.less$/,
+            loader: ["style-loader", "css-loader", "less-loader"]
+        },
+        {
+            test: /\.svg$/,
+            loader: 'svg-inline-loader'
+        }]
     }
 }

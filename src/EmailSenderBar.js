@@ -8,24 +8,25 @@ import Label  from 'react-bootstrap/lib/Label';
 
 
 
-class SearchBar extends Component {
+class EmailSenderBar extends Component {
 
 
   render() {
-      const {searchText, onInptChange, onBtnClick, searchTerm} = this.props;
+      const {sendText, onBtnClick, emailToSend, onInptChange} = this.props;
 
     return (
                     <Form horizontal>
                         <Col sm={10} md={10} xs={10} lg={8}>
                                 <FormControl type="text" bsStyle="default" bsSize="large"
                                 onChange={onInptChange}
-                                value={searchTerm}  
-                                placeholder="Введите адрес YouTube-канала" 
-                                />
+                                value={emailToSend}  
+                                placeholder="Введите e-mail-адрес" />
                         </Col>
                         <Col sm={1} md={1} xs ={1} lg={1}>
-                                 <Button type="button" onClick={onBtnClick} bsStyle="danger" bsSize="large">
-                                 {searchText}
+                                 <Button type="button" bsStyle="warning" bsSize="large"
+                                 onClick={onBtnClick}
+                                 >
+                                 {sendText}
                                 </Button>
                         </Col>
                     </Form>
@@ -34,4 +35,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+export default EmailSenderBar;
