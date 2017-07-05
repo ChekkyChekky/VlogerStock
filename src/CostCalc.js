@@ -17,7 +17,16 @@ class CostCalc extends Component{
     render(){
         const {viewsSum, videosSum, bmHumor} = this.props
         const cost_per_1000 = 0.5;
-        const result = Math.round( viewsSum / videosSum * cost_per_1000);
+        let result = 0;
+        if(viewsSum / videosSum < 300000)
+        {
+            result = Math.round( viewsSum / videosSum * cost_per_1000);
+        }
+        else
+        {
+            result = Math.round( viewsSum / videosSum * cost_per_1000 / 2);
+        }
+
         const result_30sec_promo_start = Math.round(result/7);
         const result_30sec_promo_end = Math.round(result/11);
         const result_product_placement = Math.round(result/5);

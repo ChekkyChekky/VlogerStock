@@ -55,22 +55,17 @@ class App extends Component {
     handleEmailPost() {
 
         if(validator.validate(this.state.emailToSend)){
-
+        const channelTitle = this.state.ChannelData;
         var data = JSON.stringify(
             {
                 email:
                 {
-                    value: this.state.emailToSend
+                      mail: this.state.emailToSend,
+                      channel: channelTitle
                 }
             }
             );
 
-           /* var data = JSON.stringify(
-                {
-                email: this.state.emailToSend
-                });*/
-
-            console.log(this.state.emailToSend);
 
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
@@ -84,7 +79,7 @@ class App extends Component {
             xhr.open("POST", "https://vlogstock-a0fe.restdb.io/rest/bloggeremails");
             xhr.setRequestHeader("content-type", "application/json");
             xhr.setRequestHeader("x-apikey", "595cca7bafce09e87211ea27");
-          //  xhr.setRequestHeader("cache-control", "no-cache");
+            xhr.setRequestHeader("cache-control", "no-cache");
 
             xhr.send(data);
 
@@ -94,6 +89,35 @@ class App extends Component {
             this.setState({emailError : true});
         }
             
+
+    }
+
+     handleSearchPost() {
+
+        var data = JSON.stringify(
+            {
+                search:
+                {
+                      term: this.state.channelID,
+                }
+            }
+            );
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                console.log(this.responseText);
+                }
+            });
+    
+            xhr.open("POST", "https://vlogstock-a0fe.restdb.io/rest/searchesdata");
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.setRequestHeader("x-apikey", "595cca7bafce09e87211ea27");
+            xhr.setRequestHeader("cache-control", "no-cache");
+
+            xhr.send(data);
 
     }
 
@@ -145,6 +169,7 @@ class App extends Component {
         {
             this.setState({ChannelData: null});
         }
+      this.handleSearchPost();
       const indexOfSlash = channelID.lastIndexOf('/'); 
       const BeforeId = channelID.slice(0, indexOfSlash); // 'https://www.youtube.com/channel'
       const SecondindexOfSlash = BeforeId.lastIndexOf('/');

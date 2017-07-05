@@ -13648,19 +13648,13 @@ var App = function (_Component) {
         value: function handleEmailPost() {
 
             if (validator.validate(this.state.emailToSend)) {
-
+                var channelTitle = this.state.ChannelData;
                 var data = JSON.stringify({
                     email: {
-                        value: this.state.emailToSend
+                        mail: this.state.emailToSend,
+                        channel: channelTitle
                     }
                 });
-
-                /* var data = JSON.stringify(
-                     {
-                     email: this.state.emailToSend
-                     });*/
-
-                console.log(this.state.emailToSend);
 
                 var xhr = new XMLHttpRequest();
                 xhr.withCredentials = true;
@@ -13674,7 +13668,7 @@ var App = function (_Component) {
                 xhr.open("POST", "https://vlogstock-a0fe.restdb.io/rest/bloggeremails");
                 xhr.setRequestHeader("content-type", "application/json");
                 xhr.setRequestHeader("x-apikey", "595cca7bafce09e87211ea27");
-                //  xhr.setRequestHeader("cache-control", "no-cache");
+                xhr.setRequestHeader("cache-control", "no-cache");
 
                 xhr.send(data);
 
@@ -13682,6 +13676,32 @@ var App = function (_Component) {
             } else {
                 this.setState({ emailError: true });
             }
+        }
+    }, {
+        key: 'handleSearchPost',
+        value: function handleSearchPost() {
+
+            var data = JSON.stringify({
+                search: {
+                    term: this.state.channelID
+                }
+            });
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                }
+            });
+
+            xhr.open("POST", "https://vlogstock-a0fe.restdb.io/rest/searchesdata");
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.setRequestHeader("x-apikey", "595cca7bafce09e87211ea27");
+            xhr.setRequestHeader("cache-control", "no-cache");
+
+            xhr.send(data);
         }
     }, {
         key: 'handleEmailError',
@@ -13736,6 +13756,7 @@ var App = function (_Component) {
             if (channelID === "") {
                 this.setState({ ChannelData: null });
             }
+            this.handleSearchPost();
             var indexOfSlash = channelID.lastIndexOf('/');
             var BeforeId = channelID.slice(0, indexOfSlash); // 'https://www.youtube.com/channel'
             var SecondindexOfSlash = BeforeId.lastIndexOf('/');
@@ -30812,7 +30833,13 @@ var CostCalc = function (_Component) {
                 bmHumor = _props.bmHumor;
 
             var cost_per_1000 = 0.5;
-            var result = Math.round(viewsSum / videosSum * cost_per_1000);
+            var result = 0;
+            if (viewsSum / videosSum < 300000) {
+                result = Math.round(viewsSum / videosSum * cost_per_1000);
+            } else {
+                result = Math.round(viewsSum / videosSum * cost_per_1000 / 2);
+            }
+
             var result_30sec_promo_start = Math.round(result / 7);
             var result_30sec_promo_end = Math.round(result / 11);
             var result_product_placement = Math.round(result / 5);
