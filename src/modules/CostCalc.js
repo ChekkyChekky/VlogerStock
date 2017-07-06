@@ -9,23 +9,35 @@ class CostCalc extends Component{
 
         this.state = {
             viewsSum: props.viewsSum,
-            videosSum: props.videosCount,
+            videosSum: props.videosSum,
+            commentsSum: props.commentsSum,
+            subsSum: props.subsSum,
             bmHumor: false
         };
     }
 
     render(){
-        const {viewsSum, videosSum, bmHumor} = this.props
+        const {viewsSum, videosSum,commentsSum, subsSum, bmHumor} = this.props
         const cost_per_1000 = 0.5;
         let result = 0;
-        if(viewsSum / videosSum < 300000)
+
+        result = Math.round( viewsSum / videosSum * cost_per_1000);
+        if( viewsSum / videosSum > 300.000 )
         {
-            result = Math.round( viewsSum / videosSum * cost_per_1000);
+            result = result / 2;
         }
-        else
-        {
-            result = Math.round( viewsSum / videosSum * cost_per_1000 / 2);
-        }
+    /*    const interest = (commentsSum * 100) / viewsSum;
+        const interest_growth = interest * subsSum;
+        const interest_coeff = Math.pow(2.71, interest - 5); // interest coefficient
+        console.log(interest_coeff, interest_growth, interest);
+        //const upgrade_of_base_subscribe = (viewsSum / videosSum) - subsSum;
+        //console.log(upgrade_of_base_subscribe);
+        //const views_videos_subsribe_koeff = Math.pow(1.01, upgrade_of_base_subscribe);
+        const prognoz_views = subsSum + interest_growth;
+       // const prognoz_views = viewsSum * videosSum;
+       console.log(interest_coeff, prognoz_views);
+        result = prognoz_views * interest_coeff * cost_per_1000;*/
+
 
         const result_30sec_promo_start = Math.round(result/7);
         const result_30sec_promo_end = Math.round(result/11);

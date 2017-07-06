@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: "./src/App.jsx", // входная точка - исходный файл
+    entry: "./src/App.jsx",
     output:{
         path: path.resolve(__dirname + "/public/js"),     // путь к каталогу выходных файлов
         filename: "bundle.js"       // название создаваемого файла
