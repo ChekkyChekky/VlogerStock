@@ -21,10 +21,17 @@ class CostCalc extends Component{
         const cost_per_1000 = 0.5;
         let result = 0;
 
-        result = Math.round( viewsSum / videosSum * cost_per_1000);
-        if( viewsSum / videosSum > 300.000 )
+        if(videosSum!=0)
         {
-            result = result / 2;
+            result = Math.round( viewsSum / videosSum * cost_per_1000);
+            if( viewsSum / videosSum > 300.000 )
+            {
+                result = result / 2;
+            }
+        }
+        else
+        {
+            result = subsSum * cost_per_1000;
         }
     /*    const interest = (commentsSum * 100) / viewsSum;
         const interest_growth = interest * subsSum;
@@ -39,9 +46,14 @@ class CostCalc extends Component{
         result = prognoz_views * interest_coeff * cost_per_1000;*/
 
 
-        const result_30sec_promo_start = Math.round(result/7);
-        const result_30sec_promo_end = Math.round(result/11);
-        const result_product_placement = Math.round(result/5);
+        const result_30sec_promo_start = Math.round(result/5.1);
+        const result_product_placement = Math.round(result/3.5);
+        const result_30sec_promo_end = Math.round(result/7.6);
+        const result_ssylka_opis_2ned = Math.round(result/16);
+        const result_izbrannoe_2ned = Math.round(result/20);
+        const result_likepluscomment_video = Math.round(result/83.6);
+        const result_like_video = Math.round(result/125.1);
+        
 
         const resultStr = "" + result;
         const resultNew = resultStr.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
@@ -51,9 +63,17 @@ class CostCalc extends Component{
         const result_30sec_promo_endNew = result_30sec_promo_endStr.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
         const result_product_placementStr = "" + result_product_placement;
         const result_product_placementNew = result_product_placementStr.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+        const result_ssylka_opis_2nedStr = "" + result_ssylka_opis_2ned;
+        const result_ssylka_opis_2nedNew = result_ssylka_opis_2nedStr.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+        const result_izbrannoe_2nedStr = "" + result_izbrannoe_2ned;
+        const result_izbrannoe_2nedNew = result_izbrannoe_2nedStr.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+        const result_likepluscomment_videoStr = "" + result_likepluscomment_video;
+        const result_likepluscomment_videoNew = result_likepluscomment_videoStr.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+        const result_like_videoStr = "" + result_like_video;
+        const result_like_videoNew = result_like_videoStr.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
                                                             
         return (
-                <Table bordered responsive>
+                <Table responsive>
                     <thead>
                         <tr>
                             <th><h4><Label bsStyle="default" bsSize="sm">Тип рекламы</Label></h4></th>
@@ -80,6 +100,22 @@ class CostCalc extends Component{
                                     <tr>
                                         <td><h4><Label bsStyle="info" bsSize="sm">Упоминание в конце 15 сек.</Label></h4></td>
                                         <td> <h4><Label bsStyle="success" bsSize="sm">{result_30sec_promo_endNew}</Label></h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">Ссылка в описании, 2 нед.</Label></h4></td>
+                                        <td> <h4><Label bsStyle="success" bsSize="sm">{result_ssylka_opis_2nedNew}</Label></h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">В избранное на 2 нед.</Label></h4></td>
+                                        <td> <h4><Label bsStyle="success" bsSize="sm">{result_izbrannoe_2nedNew}</Label></h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">Лайк + комментарий.</Label></h4></td>
+                                        <td> <h4><Label bsStyle="success" bsSize="sm">{result_likepluscomment_videoNew}</Label></h4></td>
+                                    </tr>
+                                    <tr>
+                                        <td><h4><Label bsStyle="info" bsSize="sm">Лайк</Label></h4></td>
+                                        <td> <h4><Label bsStyle="success" bsSize="sm">{result_like_videoNew}</Label></h4></td>
                                     </tr>
                                 </tbody>
                                 )
