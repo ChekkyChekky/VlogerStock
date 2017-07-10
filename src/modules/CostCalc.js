@@ -12,12 +12,11 @@ class CostCalc extends Component{
             videosSum: props.videosSum,
             commentsSum: props.commentsSum,
             subsSum: props.subsSum,
-            bmHumor: false
         };
     }
 
     render(){
-        const {viewsSum, videosSum,commentsSum, subsSum, bmHumor} = this.props
+        const {viewsSum, videosSum,commentsSum, subsSum} = this.props
         const cost_per_1000 = 0.5;
         let result = 0;
 
@@ -81,9 +80,6 @@ class CostCalc extends Component{
                         </tr>
                     </thead>
 
-                        
-                        {!bmHumor ?
-                                (
                                 <tbody>
                                     <tr>
                                         <td><h4><Label bsStyle="info" bsSize="sm">Заказной ролик</Label></h4></td>
@@ -118,29 +114,6 @@ class CostCalc extends Component{
                                         <td> <h4><Label bsStyle="success" bsSize="sm">{result_like_videoNew}</Label></h4></td>
                                     </tr>
                                 </tbody>
-                                )
-                            :
-                            (
-                                <tbody>
-                                    <tr>
-                                        <td><h4><Label bsStyle="info" bsSize="sm">Заказной ролик</Label></h4></td>
-                                        <td><h4><Label bsStyle="danger" bsSize="sm"> бесценно</Label></h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><h4><Label bsStyle="info" bsSize="sm">Интеграция</Label></h4></td>
-                                        <td><h4><Label bsStyle="danger" bsSize="sm">бесценно</Label></h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><h4><Label bsStyle="info" bsSize="sm">Рекламное упоминание (начало)</Label></h4></td>
-                                        <td><h4><Label bsStyle="danger" bsSize="sm">бесценно</Label></h4></td>
-                                    </tr>
-                                    <tr>
-                                        <td><h4><Label bsStyle="info" bsSize="sm">Рекламное упоминание (конец)</Label></h4></td>
-                                        <td> <h4><Label bsStyle="danger" bsSize="sm">бесценно</Label></h4></td>
-                                    </tr>
-                                </tbody>
-                            )
-                        }
                 </Table>
     );
     }

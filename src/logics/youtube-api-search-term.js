@@ -8,11 +8,10 @@ module.exports = function  (options, callback) {
   }
 
   var params = {
-    part: 'snippet',
+    part: 'snippet,id',
     key: options.key,
     q: options.term,
-    maxResults: options.maxResults,
-    type: 'video'
+    maxResults: options.maxResults
   };
 
   axios.get(ROOT_URL, { params: params })
