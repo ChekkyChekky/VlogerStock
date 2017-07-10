@@ -1,58 +1,46 @@
-import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
 
-
-import Advert from './Advert.jsx'
-import IndexComp from './Index.jsx'
-
-
+import Top from './top'
+import Result from './result'
+import Feedback from './feedback'
 
 class App extends Component {
-
-    componentWillMount(){
-        if(document.getElementById('index_id') != undefined){
-            this.setState({pageIndex: true});
-        }
-        else{
-            this.setState({pageIndex: false});
-        }
-    }
-
     constructor(props) {
-        super();
-
+        super(props);
         this.state = {
-            pageIndex: true,
-        
-        };
+            result: undefined
+        }
+        this.search = this.search.bind(this);
     }
 
-
-   
+    search(query) {
+        var that = this;
+        fetch(`/search?query=${query}`, { method: 'GET' })
+            .then((response) => response.json())
+            .then(function (responseJson) {
+                that.setState({ result: responseJson });
+            });
+    }
 
     render() {
-    const {pageIndex} = this.state;
-    
-     return (
-            <div>
-                {pageIndex ?
-                    (
-                    <IndexComp
-                    />
-                    ) : 
-                    <Advert
-                    />
-                } 
+        if (this.state.result) {
+            var result = <div>
+                <Result result={this.state.result} />
+                <Feedback />
             </div>
-            );
+        }
 
+        return <div>
+            <Top search={query => this.search(query)} />
+            {result}
+        </div>
     }
 }
 
-
-
 ReactDOM.render(
-    <App />,
-    document.getElementById("container")
+    <div>
+        <App />
+    </div>,
+    document.getElementById('root')
 )
-
