@@ -27,7 +27,7 @@ class App extends Component {
         if (this.state.result) {
             var result = <div>
                 <Result result={this.state.result} />
-                <Feedback />
+                <Feedback title={this.state.result.title}/>
             </div>
         }
 

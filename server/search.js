@@ -1,18 +1,21 @@
 var YTSearchTerm = require('./youtube-api/youtube-api-search-term');
 var YTChannels = require('./youtube-api/youtube-api-channels');
 var YTChannelsFromName = require('./youtube-api/youtube-api-channels-by-username');
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var httpRequest = require('request');
 
 const API_KEY = 'AIzaSyArh26s8VejK8o2prCiV9oCYDIw6SEcsPY';
 
 function handleSearchPost(channelID) {
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-    xhr.open("POST", "https://vlogstock-a0fe.restdb.io/rest/searchesdata");
-    xhr.setRequestHeader("content-type", "application/json");
-    xhr.setRequestHeader("x-apikey", "595cca7bafce09e87211ea27");
-    xhr.setRequestHeader("cache-control", "no-cache");
-    xhr.send(JSON.stringify({search:{term: channelID}}));
+    httpRequest({
+        url: "https://vlogstock-a0fe.restdb.io/rest/searchesdata",
+        method: 'POST',
+        headers: {
+            "content-type": "application/json",	
+            "x-apikey": "595cca7bafce09e87211ea27",		
+            "cache-control": "no-cache"
+        },
+        body: JSON.stringify({search: {term: channelID}})
+    });
 }
 
 function parse(data) {
@@ -36,6 +39,19 @@ function parse(data) {
     };
 }
 
+function channelVerify(resolve, data, queryName, index) {
+    if(data[index].snippet.channelTitle.replace(" ","").toLowerCase() == queryName.replace(" ","").toLowerCase()) {
+        YTChannels({ key: API_KEY, id: data[index].snippet.channelId }, (data) => {
+            resolve(parse(data[0]));
+        });
+    } else {
+        index!=data.length-1 ? channelVerify(resolve, data, queryName, index+1) : 
+        YTChannels({ key: API_KEY, id: data[0].snippet.channelId }, (data) => {
+            resolve(parse(data[0]));
+        });
+    }
+}
+
 module.exports = function (query) {
     return new Promise((resolve, reject) => {
         handleSearchPost(query);
@@ -46,16 +62,15 @@ module.exports = function (query) {
         if (typeSearch === 'channel') {
             YTChannels({ key: API_KEY, id: ID }, (data) => { 
                     resolve(parse(data[0])); 
-                }
-            );
+            });
         } else {
             YTChannelsFromName({ key: API_KEY, forUsername: ID }, (data) => {
                 data.length !== 0 ? resolve(parse(data[0])) :
                     YTChannels({ key: API_KEY, id: ID }, (data) => {
                         data.length !== 0 ? resolve(parse(data[0])) :
-                            YTSearchTerm({ key: API_KEY, term: ID, maxResults: 5 }, (data) => {
+                            YTSearchTerm({ key: API_KEY, term: ID, maxResults: 20 }, (data) => {
                                 data.length == 0 ? resolve(undefined) :
-                                    YTChannels({ key: API_KEY, id: data[0].snippet.channelId }, (data) => { resolve(parse(data[0])); });                                
+                                    channelVerify(resolve, data, ID, 0);                                
                             });
                     });
             });

@@ -2,8 +2,12 @@ body {
     background: #edeef0;
 }
 
+.container {
+    padding: 0;
+}
+
 .block {
-    margin: 15px auto;
+    margin: 15px auto 0;
     padding: 20px;
     background: #fff;
     border-radius: 2px;
@@ -11,6 +15,35 @@ body {
     text-align: center;
 }
 
+.left-block {
+    margin-right: 7px;
+}
+
+.right-block {
+    margin-left: 7px;
+}
+
+img {    
+    max-width: 100%;
+}
+
 .img-response {
     max-height: 250px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+.ya-share2__container_size_m .ya-share2__icon {
+    height: 48px !important; /* 24px */
+    width:  48px !important; /* 24px */
+    background-size: 48px 48px !important; /* 24px 24px */
+}
+
+.ya-share2__container_size_m .ya-share2__counter {
+    font-size: 24px !important; /* 12px */
+    padding: 14px 10px 0 10px !important; /* 5px 8px 0 8px */
 }

@@ -14,6 +14,15 @@ class Top extends Component {
             return;
         }
         this.props.search(this.state.query);
+        this.ya("search")
+    }
+
+    ya(goal) {
+        try {
+            yaCounter45204297.reachGoal(goal);
+        } catch (error) {
+            
+        }        
     }
 
     render() {
@@ -30,12 +39,13 @@ class Top extends Component {
                 <img src="img/top.png"/>
                 <h3>Узнай стоимость рекламы у блогеров</h3>
                 <div className="row">
-                    <div className="col-md-6 col-md-offset-3">
+                    <div className="col-md-8 col-md-offset-2">
                         <div className="input-group">
-                            <input type="text" className="form-control" placeholder="Вставьте название канала или ссылку" 
-                                value={this.state.query} onChange={q => this.setState({query: q.target.value})} />
+                            <input type="text" className="form-control" placeholder="Название канала или ссылка" 
+                                value={this.state.query} onChange={q => this.setState({query: q.target.value})}
+                                onKeyPress={e => {if(e.charCode === 13) this.search()}} />
                             <span className="input-group-btn">
-                                <button className="btn btn-danger" type="button" onClick={this.search}>Узнать</button>
+                                <button id="search_button" className="btn btn-success" type="button" onClick={this.search}>Узнать</button>
                             </span>
                         </div>
                     </div>
