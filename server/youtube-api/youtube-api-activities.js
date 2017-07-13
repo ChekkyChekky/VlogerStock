@@ -1,6 +1,6 @@
 var axios = require('axios');
 
-var ROOT_URL = 'https://www.googleapis.com/youtube/v3/videos';
+var ROOT_URL = 'https://www.googleapis.com/youtube/v3/activities';
 
 module.exports = function  (options, callback) {
   if (!options.key) {
@@ -9,7 +9,7 @@ module.exports = function  (options, callback) {
 
   var params = {
     part: 'snippet,contentDetails',
-    channelID: options.channelID,
+    channelId: options.channelId,
     key: options.key,
     maxResults: options.maxResults
   };

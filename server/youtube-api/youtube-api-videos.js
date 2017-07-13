@@ -10,7 +10,6 @@ module.exports = function  (options, callback) {
   var params = {
     part: 'snippet,statistics',
     id: options.id,
-    //forUsername: options.forUsername,
     key: options.key,
   };
 

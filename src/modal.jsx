@@ -41,14 +41,14 @@ class ModalDialog extends Component {
             this.setState({success: true});
             var result = this.props.result;
             var body = 
-                "name=" + this.state.name;
-            fetch('/send.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: body
-        })
+                `name=${this.state.name}&budget=${this.state.budget}&niche=${this.props.niche}&email=${this.props.email}`
+            fetch('/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: body
+            })
         }
     }
 

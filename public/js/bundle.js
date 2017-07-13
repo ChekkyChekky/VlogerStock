@@ -9802,7 +9802,8 @@ var App = function (_Component) {
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
         _this.state = {
-            result: undefined
+            result: undefined,
+            prognosis: ''
         };
         _this.search = _this.search.bind(_this);
         return _this;
@@ -9815,7 +9816,19 @@ var App = function (_Component) {
             fetch('/search?query=' + query, { method: 'GET' }).then(function (response) {
                 return response.json();
             }).then(function (responseJson) {
-                that.setState({ result: responseJson });
+                that.setState({ prognosis: '' });
+                return that.setState({ result: responseJson });
+            }).then(function (result) {
+                fetch('/prognosis?id=' + that.state.result.id, { method: 'GET' }).then(function (response) {
+                    return response.json();
+                }).then(function (responseJson) {
+                    console.log(responseJson.result);
+                    if (responseJson.result == -1) {
+                        that.setState({ prognosis: (that.state.result.result * 1.6).toFixed() });
+                    } else {
+                        that.setState({ prognosis: responseJson.result });
+                    }
+                });
             });
         }
     }, {
@@ -9827,7 +9840,7 @@ var App = function (_Component) {
                 var result = _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement(_result2.default, { result: this.state.result }),
+                    _react2.default.createElement(_result2.default, { result: this.state.result, prognosis: this.state.prognosis }),
                     _react2.default.createElement(_feedback2.default, { title: this.state.result.title })
                 );
             }
@@ -22722,11 +22735,18 @@ var ResultChanel = function (_Component2) {
                 _react2.default.createElement(
                     "div",
                     { className: "block" },
-                    _react2.default.createElement("img", { className: "img-response", src: this.props.img }),
+                    _react2.default.createElement("img", { className: "img-response", src: this.props.result.img }),
                     _react2.default.createElement(
                         "h3",
                         null,
-                        this.props.text
+                        "\u041A\u0430\u043D\u0430\u043B: ",
+                        this.props.result.title
+                    ),
+                    _react2.default.createElement(
+                        "h3",
+                        null,
+                        "\u041F\u0440\u043E\u0433\u043D\u043E\u0437 \u043E\u0445\u0432\u0430\u0442\u0430: ",
+                        this.props.prognosis.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
                     )
                 )
             );
@@ -22751,7 +22771,7 @@ var Result = function (_Component3) {
             return _react2.default.createElement(
                 "div",
                 { className: "container" },
-                _react2.default.createElement(ResultChanel, { img: this.props.result.img, text: "Канал: " + this.props.result.title }),
+                _react2.default.createElement(ResultChanel, { result: this.props.result, prognosis: this.props.prognosis }),
                 _react2.default.createElement(ResultItem, { text: "\u0412\u0438\u0434\u0435\u043E\u0440\u043E\u043B\u0438\u043A \u043D\u0430 \u043A\u0430\u043D\u0430\u043B\u0435", left: true, result: this.props.result.result, color: "#ffd700" }),
                 _react2.default.createElement(ResultItem, { text: "\u0418\u043D\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044F \u0432 \u0432\u044B\u043F\u0443\u0441\u043A", left: false, result: this.props.result.result_product_placement, color: "#c0c0c0" }),
                 _react2.default.createElement(ResultItem, { text: "\u0423\u043F\u043E\u043C\u0438\u043D\u0430\u043D\u0438\u0435 \u0432 \u043D\u0430\u0447\u0430\u043B\u0435 (20 \u0441\u0435\u043A.)", left: true, result: this.props.result.result_20sec_promo_start, color: "#cd7f32" }),
@@ -23008,58 +23028,83 @@ var Search = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
 
+        _this.state = {
+            last: {
+                img: '',
+                title: ''
+            },
+            random: {
+                img: '',
+                title: ''
+            }
+        };
         _this.search = _this.search.bind(_this);
         return _this;
     }
 
     _createClass(Search, [{
-        key: "search",
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            var that = this;
+            fetch('/last', { method: 'GET' }).then(function (response) {
+                return response.json();
+            }).then(function (responseJson) {
+                that.setState({ last: responseJson });
+            });
+            fetch('/random', { method: 'GET' }).then(function (response) {
+                return response.json();
+            }).then(function (responseJson) {
+                that.setState({ random: responseJson });
+            });
+        }
+    }, {
+        key: 'search',
         value: function search(query) {
             this.props.search(query);
             this.ya("search");
         }
     }, {
-        key: "ya",
+        key: 'ya',
         value: function ya(goal) {
             try {
                 yaCounter45204297.reachGoal(goal);
             } catch (error) {}
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             var _this2 = this;
 
             return _react2.default.createElement(
-                "div",
-                { className: "container" },
+                'div',
+                { className: 'container' },
                 _react2.default.createElement(
-                    "div",
-                    { className: "col-sm-6", style: { padding: 0, cursor: "pointer" }, onClick: function onClick() {
-                            return _this2.search("ДНЕВНИК ХАЧА");
+                    'div',
+                    { className: 'col-sm-6', style: { padding: 0, cursor: "pointer" }, onClick: function onClick() {
+                            return _this2.search(_this2.state.last.title);
                         } },
                     _react2.default.createElement(
-                        "div",
-                        { className: "block search-block left-block" },
-                        _react2.default.createElement("img", { className: "pull-left logo-chanel", src: "https://yt3.ggpht.com/-HzlTfgPLl6U/AAAAAAAAAAI/AAAAAAAAAAA/2aFSThc1OMM/s240-c-k-no-mo-rj-c0xffffff/photo.jpg" }),
+                        'div',
+                        { className: 'block search-block left-block' },
+                        _react2.default.createElement('img', { className: 'pull-left logo-chanel', src: this.state.last.img }),
                         _react2.default.createElement(
-                            "div",
-                            { className: "pull-left title-block" },
+                            'div',
+                            { className: 'pull-left title-block' },
                             _react2.default.createElement(
-                                "div",
-                                { className: "center-block" },
+                                'div',
+                                { className: 'center-block' },
                                 _react2.default.createElement(
-                                    "h3",
+                                    'h3',
                                     null,
-                                    "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0439"
+                                    '\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0439'
                                 ),
                                 _react2.default.createElement(
-                                    "h4",
+                                    'h4',
                                     null,
                                     _react2.default.createElement(
-                                        "b",
+                                        'b',
                                         null,
-                                        "\u0414\u041D\u0415\u0412\u041D\u0418\u041A \u0425\u0410\u0427\u0410"
+                                        this.state.last.title
                                     )
                                 )
                             )
@@ -23067,29 +23112,29 @@ var Search = function (_Component) {
                     )
                 ),
                 _react2.default.createElement(
-                    "div",
-                    { className: "col-sm-6", style: { padding: 0, cursor: "pointer" }, onClick: function onClick() {
-                            return _this2.search("Иван гай");
+                    'div',
+                    { className: 'col-sm-6', style: { padding: 0, cursor: "pointer" }, onClick: function onClick() {
+                            return _this2.search(_this2.state.random.title);
                         } },
                     _react2.default.createElement(
-                        "div",
-                        { className: "block search-block right-block" },
-                        _react2.default.createElement("img", { className: "pull-left logo-chanel", src: "https://yt3.ggpht.com/-ZPtgaY_lFDY/AAAAAAAAAAI/AAAAAAAAAAA/U_8gJcnIMiE/s240-c-k-no-mo-rj-c0xffffff/photo.jpg" }),
+                        'div',
+                        { className: 'block search-block right-block' },
+                        _react2.default.createElement('img', { className: 'pull-left logo-chanel', src: this.state.random.img }),
                         _react2.default.createElement(
-                            "div",
-                            { className: "pull-left title-block" },
+                            'div',
+                            { className: 'pull-left title-block' },
                             _react2.default.createElement(
-                                "h3",
+                                'h3',
                                 null,
-                                "\u0421\u043B\u0443\u0447\u0430\u0439\u043D\u044B\u0439"
+                                '\u0421\u043B\u0443\u0447\u0430\u0439\u043D\u044B\u0439'
                             ),
                             _react2.default.createElement(
-                                "h4",
+                                'h4',
                                 null,
                                 _react2.default.createElement(
-                                    "b",
+                                    'b',
                                     null,
-                                    "\u0418\u0432\u0430\u043D \u0433\u0430\u0439"
+                                    this.state.random.title
                                 )
                             )
                         )
@@ -23178,7 +23223,7 @@ var ModalDialog = function (_Component) {
                 this.setState({ success: true });
                 var result = this.props.result;
                 var body = "name=" + this.state.name;
-                fetch('/send.php', {
+                fetch('/send', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'

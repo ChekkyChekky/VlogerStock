@@ -20,8 +20,9 @@ class ResultChanel extends Component {
     render() {
         return <div>
             <div className="block">
-                <img className="img-response" src={this.props.img}/>
-                <h3>{this.props.text}</h3>
+                <img className="img-response" src={this.props.result.img}/>
+                <h3>Канал: {this.props.result.title}</h3>
+                <h3>Прогноз охвата: {this.props.prognosis.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')}</h3>
             </div>
         </div>
     }
@@ -30,7 +31,7 @@ class ResultChanel extends Component {
 class Result extends Component {
     render() {
         return <div className="container">
-            <ResultChanel img={this.props.result.img} text={"Канал: " + this.props.result.title} />
+            <ResultChanel result={this.props.result} prognosis={this.props.prognosis}/>
             <ResultItem text="Видеоролик на канале" left={true} result={this.props.result.result} color="#ffd700"/>
             <ResultItem text="Интеграция в выпуск" left={false} result={this.props.result.result_product_placement} color="#c0c0c0"/>
             <ResultItem text="Упоминание в начале (20 сек.)" left={true} result={this.props.result.result_20sec_promo_start} color="#cd7f32"/>

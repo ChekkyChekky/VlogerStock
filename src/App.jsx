@@ -10,7 +10,8 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            result: undefined
+            result: undefined,
+            prognosis: ''
         }
         this.search = this.search.bind(this);
     }
@@ -20,14 +21,27 @@ class App extends Component {
         fetch(`/search?query=${query}`, { method: 'GET' })
             .then((response) => response.json())
             .then(function (responseJson) {
-                that.setState({ result: responseJson });
-            });
+                that.setState({ prognosis: '' });
+                return that.setState({ result: responseJson });
+            })
+            .then(function(result) {
+                fetch(`/prognosis?id=${that.state.result.id}`, { method: 'GET' })
+                    .then((response) => response.json())
+                    .then(function (responseJson) {
+                        console.log(responseJson.result);
+                        if(responseJson.result == -1) {
+                            that.setState({ prognosis: (that.state.result.result*1.6).toFixed() });
+                        } else {
+                            that.setState({ prognosis: responseJson.result });
+                        }
+                    });
+            });        
     }
 
     render() {
         if (this.state.result) {
             var result = <div>
-                <Result result={this.state.result} />
+                <Result result={this.state.result} prognosis={this.state.prognosis}/>
                 <Feedback title={this.state.result.title}/>
             </div>
         }
