@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import ModalDialog from './modal';
 
 class Top extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            query: ''
+            query: '',
+            modalOpen: false
         }
         this.search = this.search.bind(this);
     }
@@ -50,7 +52,10 @@ class Top extends Component {
                         </div>
                     </div>
                 </div>
+                <button id="order_button" className="btn btn-primary" type="button" style={{marginTop: "20px"}}
+                    onClick={() => this.setState({modalOpen: true})}>Заказать рекламу</button>
             </div>
+            <ModalDialog open={this.state.modalOpen} closed={() => this.setState({modalOpen: false})}/>
         </div>
     }
 }

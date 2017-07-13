@@ -31,6 +31,19 @@ img {
     max-height: 250px;
 }
 
+.search-block {
+    height: 101px;
+    padding: 0;
+}
+
+.logo-chanel {
+    height: 101px;
+}
+
+.title-block {
+    width: calc(100% - 101px);
+}
+
 @media (min-width: 768px) {
     .container {
         width: 750px;

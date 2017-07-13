@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 
 import Top from './top'
+import Search from './search'
 import Result from './result'
 import Feedback from './feedback'
 
@@ -33,6 +34,7 @@ class App extends Component {
 
         return <div>
             <Top search={query => this.search(query)} />
+            <Search search={query => this.search(query)} />
             {result}
         </div>
     }

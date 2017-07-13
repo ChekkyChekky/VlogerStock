@@ -9773,6 +9773,10 @@ var _top = __webpack_require__(184);
 
 var _top2 = _interopRequireDefault(_top);
 
+var _search = __webpack_require__(188);
+
+var _search2 = _interopRequireDefault(_search);
+
 var _result = __webpack_require__(185);
 
 var _result2 = _interopRequireDefault(_result);
@@ -9832,6 +9836,9 @@ var App = function (_Component) {
                 'div',
                 null,
                 _react2.default.createElement(_top2.default, { search: function search(query) {
+                        return _this2.search(query);
+                    } }),
+                _react2.default.createElement(_search2.default, { search: function search(query) {
                         return _this2.search(query);
                     } }),
                 result
@@ -22491,6 +22498,10 @@ var _react = __webpack_require__(32);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _modal = __webpack_require__(189);
+
+var _modal2 = _interopRequireDefault(_modal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22508,7 +22519,8 @@ var Top = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Top.__proto__ || Object.getPrototypeOf(Top)).call(this, props));
 
         _this.state = {
-            query: ''
+            query: '',
+            modalOpen: false
         };
         _this.search = _this.search.bind(_this);
         return _this;
@@ -22601,8 +22613,19 @@ var Top = function (_Component) {
                                 )
                             )
                         )
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { id: 'order_button', className: 'btn btn-primary', type: 'button', style: { marginTop: "20px" },
+                            onClick: function onClick() {
+                                return _this2.setState({ modalOpen: true });
+                            } },
+                        '\u0417\u0430\u043A\u0430\u0437\u0430\u0442\u044C \u0440\u0435\u043A\u043B\u0430\u043C\u0443'
                     )
-                )
+                ),
+                _react2.default.createElement(_modal2.default, { open: this.state.modalOpen, closed: function closed() {
+                        return _this2.setState({ modalOpen: false });
+                    } })
             );
         }
     }]);
@@ -22951,6 +22974,354 @@ function validate_async(email, callback)
 exporter.validate_async = validate_async;
 
 module.exports = exporter;
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(32);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Search = function (_Component) {
+    _inherits(Search, _Component);
+
+    function Search(props) {
+        _classCallCheck(this, Search);
+
+        var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
+
+        _this.search = _this.search.bind(_this);
+        return _this;
+    }
+
+    _createClass(Search, [{
+        key: "search",
+        value: function search(query) {
+            this.props.search(query);
+            this.ya("search");
+        }
+    }, {
+        key: "ya",
+        value: function ya(goal) {
+            try {
+                yaCounter45204297.reachGoal(goal);
+            } catch (error) {}
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                "div",
+                { className: "container" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-sm-6", style: { padding: 0, cursor: "pointer" }, onClick: function onClick() {
+                            return _this2.search("ДНЕВНИК ХАЧА");
+                        } },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "block search-block left-block" },
+                        _react2.default.createElement("img", { className: "pull-left logo-chanel", src: "https://yt3.ggpht.com/-HzlTfgPLl6U/AAAAAAAAAAI/AAAAAAAAAAA/2aFSThc1OMM/s240-c-k-no-mo-rj-c0xffffff/photo.jpg" }),
+                        _react2.default.createElement(
+                            "div",
+                            { className: "pull-left title-block" },
+                            _react2.default.createElement(
+                                "div",
+                                { className: "center-block" },
+                                _react2.default.createElement(
+                                    "h3",
+                                    null,
+                                    "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0439"
+                                ),
+                                _react2.default.createElement(
+                                    "h4",
+                                    null,
+                                    _react2.default.createElement(
+                                        "b",
+                                        null,
+                                        "\u0414\u041D\u0415\u0412\u041D\u0418\u041A \u0425\u0410\u0427\u0410"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "col-sm-6", style: { padding: 0, cursor: "pointer" }, onClick: function onClick() {
+                            return _this2.search("Иван гай");
+                        } },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "block search-block right-block" },
+                        _react2.default.createElement("img", { className: "pull-left logo-chanel", src: "https://yt3.ggpht.com/-ZPtgaY_lFDY/AAAAAAAAAAI/AAAAAAAAAAA/U_8gJcnIMiE/s240-c-k-no-mo-rj-c0xffffff/photo.jpg" }),
+                        _react2.default.createElement(
+                            "div",
+                            { className: "pull-left title-block" },
+                            _react2.default.createElement(
+                                "h3",
+                                null,
+                                "\u0421\u043B\u0443\u0447\u0430\u0439\u043D\u044B\u0439"
+                            ),
+                            _react2.default.createElement(
+                                "h4",
+                                null,
+                                _react2.default.createElement(
+                                    "b",
+                                    null,
+                                    "\u0418\u0432\u0430\u043D \u0433\u0430\u0439"
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Search;
+}(_react.Component);
+
+exports.default = Search;
+
+/***/ }),
+/* 189 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(32);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function validateEmail(email) {
+    var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+var ModalDialog = function (_Component) {
+    _inherits(ModalDialog, _Component);
+
+    function ModalDialog(props) {
+        _classCallCheck(this, ModalDialog);
+
+        var _this = _possibleConstructorReturn(this, (ModalDialog.__proto__ || Object.getPrototypeOf(ModalDialog)).call(this, props));
+
+        _this.state = {
+            success: false,
+            budget: 1000,
+            niche: '',
+            name: '',
+            email: '',
+            isValidBudget: true,
+            isValidNiche: true,
+            isValidName: true,
+            isValidEmail: true
+        };
+        _this.closed = _this.closed.bind(_this);
+        _this.send = _this.send.bind(_this);
+        return _this;
+    }
+
+    _createClass(ModalDialog, [{
+        key: 'closed',
+        value: function closed(e) {
+            if (e.currentTarget === e.target) {
+                this.setState({ success: false });
+                this.props.closed();
+            }
+        }
+    }, {
+        key: 'send',
+        value: function send() {
+            this.state.budget <= 0 ? this.setState({ isValidNiche: false }) : this.setState({ isValidNiche: true });
+            this.state.niche.length < 2 ? this.setState({ isValidNiche: false }) : this.setState({ isValidNiche: true });
+            this.state.name.length < 3 ? this.setState({ isValidName: false }) : this.setState({ isValidName: true });
+            !validateEmail(this.state.email) ? this.setState({ isValidEmail: false }) : this.setState({ isValidEmail: true });
+
+            if (this.state.budget > 0 && this.state.niche.length >= 2 && this.state.name.length >= 3 && validateEmail(this.state.email)) {
+                this.setState({ success: true });
+                var result = this.props.result;
+                var body = "name=" + this.state.name;
+                fetch('/send.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: body
+                });
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            if (!this.state.success) {
+                var modalBody = _react2.default.createElement(
+                    'div',
+                    { className: 'modal-body' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: this.state.isValidBudget ? "form-group" : "form-group has-error" },
+                        _react2.default.createElement(
+                            'label',
+                            { className: 'modal-label' },
+                            '\u0412\u0430\u0448\u0435 \u0431\u044E\u0434\u0436\u0435\u0442'
+                        ),
+                        _react2.default.createElement('input', { type: 'number', className: 'form-control center-block', placeholder: '1000', value: this.state.budget, onChange: function onChange(e) {
+                                return _this2.setState({ budget: e.target.value });
+                            } })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: this.state.isValidNiche ? "form-group" : "form-group has-error" },
+                        _react2.default.createElement(
+                            'label',
+                            { className: 'modal-label' },
+                            '\u0412\u0430\u0448\u0430 \u043D\u0438\u0448\u0430 '
+                        ),
+                        _react2.default.createElement('input', { type: 'text', className: 'form-control center-block', placeholder: '\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F \u043F\u0440\u0430\u0437\u0434\u043D\u0438\u043A\u043E\u0432', value: this.state.niche, onChange: function onChange(e) {
+                                return _this2.setState({ niche: e.target.value });
+                            } })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: this.state.isValidName ? "form-group" : "form-group has-error" },
+                        _react2.default.createElement(
+                            'label',
+                            { className: 'modal-label' },
+                            '\u0412\u0430\u0448\u0435 \u0438\u043C\u044F'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', className: 'form-control center-block', placeholder: '\u0418\u0432\u0430\u043D', value: this.state.name, onChange: function onChange(e) {
+                                return _this2.setState({ name: e.target.value });
+                            } })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: this.state.isValidEmail ? "form-group" : "form-group has-error" },
+                        _react2.default.createElement(
+                            'label',
+                            { className: 'modal-label' },
+                            'Email'
+                        ),
+                        _react2.default.createElement('input', { type: 'email', className: 'form-control center-block', placeholder: 'example@mail.ru', value: this.state.email, onChange: function onChange(e) {
+                                return _this2.setState({ email: e.target.value });
+                            } })
+                    )
+                );
+
+                var footer = _react2.default.createElement(
+                    'div',
+                    { className: 'modal-footer' },
+                    _react2.default.createElement(
+                        'button',
+                        { type: 'button', className: 'btn btn-success center-block', onClick: this.send },
+                        '\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C'
+                    )
+                );
+            } else {
+                var modalBody = _react2.default.createElement(
+                    'div',
+                    { className: 'modal-body' },
+                    _react2.default.createElement(
+                        'h2',
+                        null,
+                        '\u0417\u0430\u044F\u0432\u043A\u0430 \u043F\u0440\u0438\u043D\u044F\u0442\u0430, \u0441 \u0432\u0430\u043C\u0438 \u0441\u0432\u044F\u0436\u0443\u0442\u0441\u044F \u0432 \u0431\u043B\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0432\u0440\u0435\u043C\u044F!'
+                    )
+                );
+                var footer = _react2.default.createElement(
+                    'div',
+                    { className: 'modal-footer' },
+                    _react2.default.createElement(
+                        'button',
+                        { type: 'button', className: 'btn btn-success center-block', onClick: this.props.closed },
+                        '\u0417\u0430\u043A\u0440\u044B\u0442\u044C'
+                    )
+                );
+            }
+
+            return _react2.default.createElement(
+                'div',
+                { hidden: !this.props.open },
+                _react2.default.createElement('div', { className: 'modal-backdrop fade in', onClick: function onClick(e) {
+                        return _this2.closed(e);
+                    } }),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'modal fade in', style: { display: "block", marginTop: "20vh" }, onClick: function onClick(e) {
+                            return _this2.closed(e);
+                        } },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'modal-dialog' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'modal-content' },
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'modal-header' },
+                                _react2.default.createElement(
+                                    'button',
+                                    { type: 'button', className: 'close', 'data-dismiss': 'modal', 'aria-hidden': 'true', onClick: function onClick(e) {
+                                            return _this2.closed(e);
+                                        } },
+                                    '\xD7'
+                                ),
+                                _react2.default.createElement(
+                                    'h4',
+                                    { className: 'modal-title' },
+                                    '\u041E\u0441\u0442\u0430\u0432\u044C\u0442\u0435 \u0437\u0430\u044F\u0432\u043A\u0443'
+                                )
+                            ),
+                            modalBody,
+                            footer
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return ModalDialog;
+}(_react.Component);
+
+exports.default = ModalDialog;
 
 /***/ })
 /******/ ]);
